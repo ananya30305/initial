@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You, Always 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Blooming / Pulsing Interactive Background Heart Container -->
+  <div class="blooming-bg-heart-container" id="bloomingBgHeart">
+    <div class="concentric-ring ring-3"></div>
+    <div class="concentric-ring ring-2"></div>
+    <div class="concentric-ring ring-1"></div>
+  </div>
+
+  <div class="floating-container" id="floatingHeartsContainer"></div>
+
+  <main class="app-wrapper">
+    <header class="top-nav">
+      <div class="brand">
+        <span class="heart-icon">💖</span>
+        <span class="brand-title">For You, Always</span>
+      </div>
+      <div class="audio-widget">
+        <button id="musicToggleBtn" class="pill-btn audio-btn" aria-label="Toggle Audio">
+          <span id="audioIcon">🎵</span> <span id="audioLabel">Play Music</span>
+        </button>
+        <audio id="bgAudio" loop src="audio/background.mp3"></audio>
+      </div>
+    </header>
+
+    <section class="card hero-card">
+      <div class="hero-header">
+        <div class="time-badge">
+          <span id="liveDateStr">Sunday, 18 May 2025</span>
+          <span class="divider">|</span>
+          <span id="liveClock">10:24 AM</span>
+        </div>
+        <div class="calendar-trigger-wrapper">
+          <button id="calendarToggleBtn" class="calendar-picker-btn">
+            <span id="selectedDateBadge">18/05/2026</span>
+            <span class="cal-icon">📅</span>
+          </button>
+          
+          <div id="calendarDropdown" class="calendar-dropdown hidden">
+            <div class="cal-nav">
+              <button id="prevMonthBtn" class="cal-nav-btn">&lt;</button>
+              <span id="calMonthYearTitle" class="cal-title">August 2026</span>
+              <button id="nextMonthBtn" class="cal-nav-btn">&gt;</button>
+            </div>
+            <div class="cal-weekdays">
+              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+            <div id="calDaysGrid" class="cal-days-grid"></div>
+            <div class="cal-footer">
+              <span class="cal-limit">Till Dec 2040</span>
+              <button id="calTodayBtn" class="cal-today-link">Today</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <div class="hero-text-content">
+          <h1 id="dynamicGreeting" class="hero-greeting">Goodiee Morningiee, <br><span class="highlight-pink">Mudduu 💕</span></h1>
+          <p id="timeSubMessage" class="hero-subtext">I hope your day is as amazing as your smile. ✨</p>
+          <div class="pill-tag">
+            <span>I'm thinking of you muddu💌</span>
+          </div>
+          <div class="hero-status">
+            <span class="status-heart">💖</span>
+            <span id="dynamicStatusText">It's a beautiful day! Wishing you a day full of happiness and good vibes Kandhaa.☀️</span>
+          </div>
+        </div>
+
+        <div class="hero-character-container">
+          <div class="speech-bubble" id="characterSpeechBubble">
+            <p id="speechBubbleText">No matter what, I'm always here for you puppu.💖</p>
+          </div>
+          <img id="mainCharacterImg" src="images/main-character.png" alt="Cute Character" class="character-img">
+        </div>
+      </div>
+    </section>
+
+    <section class="card feelings-card">
+      <h3 class="section-title">How are you feeling today, Hubby? 💖</h3>
+      <div class="feelings-grid">
+        <button class="feeling-btn" data-action="sad">
+          <span class="feeling-emoji">😔</span>
+          <span class="feeling-label">I'm Sad</span>
+        </button>
+        <button class="feeling-btn" data-action="miss">
+          <span class="feeling-emoji">🥺</span>
+          <span class="feeling-label">I Miss You</span>
+        </button>
+        <button class="feeling-btn" data-action="happy">
+          <span class="feeling-emoji">😆</span>
+          <span class="feeling-label">I'm Happy</span>
+        </button>
+        <button class="feeling-btn" data-action="hug">
+          <span class="feeling-emoji">🤗</span>
+          <span class="feeling-label">Virtual Hug</span>
+        </button>
+        <button class="feeling-btn" data-action="kiss">
+          <span class="feeling-emoji">💋</span>
+          <span class="feeling-label">Kiss Attack</span>
+        </button>
+        <button class="feeling-btn" data-action="surprise">
+          <span class="feeling-emoji">🎁</span>
+          <span class="feeling-label">Surprise Me</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="content-split-grid">
+      <section class="card note-card">
+        <div class="card-header">
+          <span class="card-icon">💖</span>
+          <h3>Today's Love Note</h3>
+        </div>
+        <div class="note-paper">
+          <p id="dailyLoveNoteText">"I hope you remember how deeply you're loved."</p>
+          <span class="note-signature">— Your Wifey 💖</span>
+        </div>
+      </section>
+
+      <section class="card letter-card">
+        <div class="card-header">
+          <span class="card-icon">📖</span>
+          <h3>Daily Letter</h3>
+        </div>
+        <div class="letter-preview-content">
+          <p id="dailyLetterPreview">You've got this, my love. I believe in you always My Hububu 💖</p>
+          <button id="openLetterBtn" class="pill-btn primary-btn">Read Letter 💌</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="card special-days-card">
+      <h3 class="section-title"><span class="card-icon">💖</span> Our Special Days</h3>
+      <div class="special-days-grid">
+        <div class="special-day-item">
+          <span class="sd-icon">🎂</span>
+          <div class="sd-info">
+            <h4>His Birthday</h4>
+            <p class="sd-date">30 March</p>
+            <p class="sd-desc">The day my world became brighter 💖</p>
+          </div>
+        </div>
+        <div class="special-day-item">
+          <span class="sd-icon">💖</span>
+          <div class="sd-info">
+            <h4>Our Anniversary</h4>
+            <p class="sd-date">29 May</p>
+            <p class="sd-desc">The day we promised forever 💖</p>
+          </div>
+        </div>
+        <div class="special-day-item">
+          <span class="sd-icon">⭐</span>
+          <div class="sd-info">
+            <h4>Valentine's Day</h4>
+            <p class="sd-date">14 February</p>
+            <p class="sd-desc">My Valentine every single day 💖</p>
+          </div>
+        </div>
+        <div class="special-day-item">
+          <span class="sd-icon">⭐</span>
+          <div class="sd-info">
+            <h4>New Year</h4>
+            <p class="sd-date">1 January</p>
+            <p class="sd-desc">A new year, same crazy love 💖</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="infinity-symbol">∞</div>
+      <h3>Forever & Always</h3>
+      <p class="footer-msg">You are my today, my tomorrow and my forever.<br>Thank you for being mine. I love you more than you'll ever know.</p>
+      <div class="footer-tags">
+        <span>My Muddu</span> • <span>Your Wifey Loves You</span> • <span>My Puppu</span> 
+      </div>
+    </footer>
+  </main>
+
+  <div id="letterModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button id="closeLetterBtn" class="modal-close">&times;</button>
+      <div class="modal-header">
+        <span class="modal-icon">💌</span>
+        <h2 id="modalLetterTitle">Daily Letter</h2>
+        <span id="modalLetterDate" class="modal-date">18 May 2026</span>
+      </div>
+      <div class="modal-body">
+        <div id="modalLetterBody" class="letter-full-text"></div>
+      </div>
+      <div class="modal-footer">
+        <span>Made with all my love, just for you 💕</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

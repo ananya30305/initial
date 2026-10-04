@@ -1,0 +1,754 @@
+:root {
+  --bg-color: #fcf4f6;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --primary-pink: #e65c7b;
+  --soft-pink: #f2a6b9;
+  --light-pink: #fce8ec;
+  --accent-pink: #b82c4f;
+  --text-dark: #4a1525;
+  --text-muted: #733245;
+  --border-radius: 24px;
+  --card-shadow: 0 12px 35px rgba(242, 166, 185, 0.25);
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px 12px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --- TRUE BLOOMING & PULSING BACKGROUND HEART SHAPE (Richer & Darker Pink) --- */
+.blooming-bg-heart-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.concentric-ring {
+  position: absolute;
+  background: radial-gradient(circle, rgba(230, 115, 142, 0.55) 0%, rgba(214, 80, 112, 0.3) 65%, transparent 100%);
+  animation: bloomHeartPulse 4s infinite ease-in-out;
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 29.6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 29.6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+.ring-3 {
+  width: 320px;
+  height: 300px;
+  animation-delay: 0s;
+  opacity: 0.75;
+}
+
+.ring-2 {
+  width: 580px;
+  height: 540px;
+  animation-delay: 1.3s;
+  opacity: 0.55;
+}
+
+.ring-1 {
+  width: 820px;
+  height: 760px;
+  animation-delay: 2.6s;
+  opacity: 0.35;
+}
+
+@keyframes bloomHeartPulse {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.12); filter: drop-shadow(0 0 45px rgba(214, 80, 112, 0.55)); }
+  100% { transform: scale(0.9); }
+}
+
+/* Floating Hearts background */
+.floating-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -20px;
+  color: var(--soft-pink);
+  opacity: 0.5;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.5; }
+  100% { transform: translateY(-105vh) scale(1.2) rotate(360deg); opacity: 0; }
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 820px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Cards Shared Styles */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+/* Beating Heart Animation & Touch Glow Effect */
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+
+.heart-icon, .status-heart, .card-icon, .sd-icon {
+  display: inline-block;
+  animation: heartBeat 2.5s infinite ease-in-out;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  user-select: none;
+}
+
+/* Touch / Click Reddish-Pink Glow Reaction */
+.touch-glow {
+  transform: scale(1.35) rotate(-8deg) !important;
+  filter: drop-shadow(0 0 10px #ff1744) hue-rotate(-15deg);
+}
+
+/* Header Nav */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--accent-pink);
+  font-size: 1.1rem;
+}
+
+.pill-btn {
+  background: #fff;
+  border: 1.5px solid var(--light-pink);
+  color: var(--accent-pink);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.pill-btn:hover {
+  background: var(--primary-pink);
+  color: #fff;
+  border-color: var(--primary-pink);
+}
+
+/* Hero Section Layout */
+.hero-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 247, 249, 0.95) 100%);
+  overflow: visible;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.time-badge {
+  background: rgba(252, 232, 236, 0.6);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  gap: 8px;
+}
+
+.calendar-trigger-wrapper {
+  position: relative;
+}
+
+.calendar-picker-btn {
+  background: #fff;
+  border: 1.5px solid var(--light-pink);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 700;
+  color: var(--accent-pink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-greeting {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.highlight-pink {
+  color: var(--primary-pink);
+  font-family: inherit;
+}
+
+.hero-subtext {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.pill-tag {
+  display: inline-block;
+  background: #fff;
+  border: 1.5px solid var(--light-pink);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--accent-pink);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.hero-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+/* Character Styling & Speech Bubble with Transparent Background */
+.hero-character-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.speech-bubble {
+  background: #fff;
+  border: 1px solid var(--light-pink);
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: var(--text-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  margin-bottom: 8px;
+  position: relative;
+  text-align: center;
+  max-width: 180px;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+
+.character-img {
+  width: 100%;
+  max-width: 190px;
+  height: auto;
+  object-fit: contain;
+  background: transparent !important;
+  /* This magically filters out the grey/white checkerboard background pixels from the image */
+  mix-blend-mode: darken;
+  filter: contrast(120%) brightness(105%) drop-shadow(0 8px 16px rgba(242, 166, 185, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.character-img:hover {
+  transform: scale(1.03);
+}
+
+/* Calendar Dropdown Box */
+.calendar-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border: 1px solid var(--light-pink);
+  z-index: 100;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.cal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cal-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: var(--accent-pink);
+}
+
+.cal-nav-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--accent-pink);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.cal-day-cell {
+  padding: 8px 0;
+  font-size: 0.85rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.cal-day-cell:hover {
+  background: var(--light-pink);
+}
+
+.cal-day-cell.active-real-today {
+  background: var(--primary-pink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.cal-day-cell.selected-temp {
+  border: 2px solid var(--accent-pink);
+}
+
+.cal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #f8f0f2;
+  font-size: 0.75rem;
+}
+
+.cal-today-link {
+  background: none;
+  border: none;
+  color: var(--accent-pink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Feelings Buttons Section */
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  color: var(--accent-pink);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.feelings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.feeling-btn {
+  background: #fff;
+  border: 1px solid var(--light-pink);
+  border-radius: 16px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.feeling-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(242, 166, 185, 0.25);
+  border-color: var(--soft-pink);
+}
+
+.feeling-emoji {
+  font-size: 1.5rem;
+}
+
+.feeling-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Dual Grid: Notes & Letter */
+.content-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.card-header h3 {
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.note-paper {
+  background: #fdf2f4;
+  border-radius: 16px;
+  padding: 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 4px solid var(--primary-pink);
+}
+
+#dailyLoveNoteText {
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.note-signature {
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-pink);
+  margin-top: 8px;
+}
+
+.letter-preview-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 32px);
+  gap: 12px;
+}
+
+#dailyLetterPreview {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.primary-btn {
+  background: var(--primary-pink);
+  color: #fff;
+  border: none;
+  align-self: flex-start;
+}
+
+.primary-btn:hover {
+  background: var(--accent-pink);
+}
+
+/* Special Days Card */
+.special-days-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.special-day-item {
+  background: #fff;
+  border: 1px solid var(--light-pink);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sd-icon {
+  font-size: 1.5rem;
+  background: var(--bg-color);
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.sd-info h4 {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.sd-date {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-pink);
+}
+
+.sd-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Footer Styling */
+.main-footer {
+  text-align: center;
+  padding: 24px 12px;
+}
+
+.infinity-symbol {
+  font-size: 2rem;
+  color: var(--primary-pink);
+  line-height: 1;
+}
+
+.main-footer h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: var(--accent-pink);
+  margin-bottom: 8px;
+}
+
+.footer-msg {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.footer-tags {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--soft-pink);
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(74, 21, 37, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  animation: modalUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalUp {
+  from { transform: translateY(30px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--bg-color);
+  border: none;
+  font-size: 1.4rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--accent-pink);
+  cursor: pointer;
+}
+
+.modal-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--light-pink);
+  padding-bottom: 12px;
+}
+
+.modal-header h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-pink);
+  font-size: 1.4rem;
+}
+
+.modal-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-bottom: 16px;
+}
+
+.letter-full-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  white-space: pre-line;
+}
+
+.modal-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--soft-pink);
+  font-weight: 600;
+}
+
+/* Toast Messages */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast-message {
+  background: var(--accent-pink);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(184, 44, 79, 0.3);
+  animation: toastFade 0.3s ease forwards;
+}
+
+@keyframes toastFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hero-body {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-greeting {
+    font-size: 1.8rem;
+  }
+  
+  .content-split-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feelings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .special-days-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .time-badge {
+    font-size: 0.75rem;
+  }
+}
