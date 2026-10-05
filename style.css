@@ -772,7 +772,7 @@ body {
   .calendar-dropdown {
     position: fixed !important;
     top: 50vh !important;
-    left: 75vw !important;
+    left: 50vw !important;
     transform: translate(-50%, -50%) !important;
     width: 300px !important;
     max-width: 92vw !important;
