@@ -1,3 +1,4 @@
+
 :root {
     --cream: #fff8f5;
     --pink: #e88a9b;
@@ -11,37 +12,38 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 html,
 body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 body {
     font-family: "DM Sans", sans-serif;
     background: var(--cream);
     color: var(--brown);
-    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: 72px minmax(0, 1fr) 165px;
 }
 
 
-/* =========================
+/* =====================================================
    TOP BAR
-========================= */
+===================================================== */
 
 .top-bar {
-    height: 72px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     padding: 0 24px;
 
-    background: rgba(255, 248, 245, 0.96);
-
+    background: rgba(255, 248, 245, 0.97);
     border-bottom: 1px solid rgba(143, 64, 82, 0.15);
 
     position: relative;
@@ -50,56 +52,41 @@ body {
     backdrop-filter: blur(12px);
 }
 
-
 .back-button {
     text-decoration: none;
 
     color: var(--dark-pink);
-
-    background: #fff;
+    background: white;
 
     border: 1px solid #efd4da;
 
     padding: 9px 16px;
-
     border-radius: 30px;
 
     font-size: 14px;
     font-weight: 600;
 
-    transition: 0.2s;
+    white-space: nowrap;
 }
-
-
-.back-button:hover {
-    transform: translateX(-3px);
-}
-
 
 .home-title {
     text-align: center;
 }
 
-
 .home-title span {
     display: block;
 
     font-family: "Great Vibes", cursive;
-
     font-size: 30px;
 
     color: var(--dark-pink);
 }
 
-
 .home-title small {
     font-size: 11px;
-
     color: #a8757e;
-
     letter-spacing: 1px;
 }
-
 
 .room-name {
     min-width: 90px;
@@ -113,40 +100,38 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    GAME WORLD
-========================= */
+===================================================== */
 
 .game-world {
     position: relative;
 
-    height: calc(100vh - 72px - 170px);
-
-    min-height: 420px;
+    min-height: 0;
 
     overflow: hidden;
 
     background: #eadbd5;
 }
 
-
 .room-background {
     position: absolute;
-
     inset: 0;
 
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
 
-    transition:
-        background-image 0.5s ease,
-        opacity 0.4s ease;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    transition: background-image 0.35s ease;
 }
 
 
+/* soft overlay */
 .world-light {
     position: absolute;
-
     inset: 0;
 
     pointer-events: none;
@@ -154,17 +139,17 @@ body {
     background:
         linear-gradient(
             to bottom,
-            rgba(255,255,255,0.05),
-            rgba(255,231,224,0.12)
+            rgba(255,255,255,0.03),
+            rgba(255,231,224,0.08)
         );
 
     z-index: 2;
 }
 
 
-/* =========================
-   LOVE MESSAGE
-========================= */
+/* =====================================================
+   TOP LOVE MESSAGE
+===================================================== */
 
 .love-message {
     position: absolute;
@@ -174,7 +159,7 @@ body {
 
     transform: translateX(-50%);
 
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.91);
 
     padding: 9px 18px;
 
@@ -191,23 +176,25 @@ body {
     z-index: 20;
 
     white-space: nowrap;
-
-    transition: 0.3s;
 }
 
 
-/* =========================
+/* =====================================================
    CHARACTERS
-========================= */
+===================================================== */
 
 .character {
     position: absolute;
 
-    bottom: 35px;
+    bottom: 28px;
 
-    /* Both characters get exactly the same space */
-    width: 110px;
-    height: 145px;
+    /*
+       IMPORTANT:
+       Both characters use EXACTLY the same
+       container size.
+    */
+    width: 130px;
+    height: 175px;
 
     display: flex;
     flex-direction: column;
@@ -216,22 +203,23 @@ body {
 
     z-index: 10;
 
-    /* ONLY position changes when walking */
-    transition: left 0.25s ease-out;
+    transition:
+        left 0.25s ease-out,
+        transform 0.2s ease;
 }
 
-/* Both characters ALWAYS have the same rendered size */
-.character img {
-    display: block;
 
-    width: 100px;
-    height: 125px;
+/*
+   BOTH characters are given the same image box.
+*/
+.character img {
+    width: 125px;
+    height: 150px;
 
     object-fit: contain;
     object-position: bottom center;
 
-    /* Prevent browser/image rendering differences */
-    max-width: none;
+    display: block;
 
     filter:
         drop-shadow(
@@ -240,76 +228,52 @@ body {
 }
 
 
-/* BOY */
-.boy-character {
-    left: 60%;
+/*
+   Your girl image has more empty/transparent
+   space around the actual character.
+
+   This makes her VISUALLY match him.
+*/
+.girl-character img {
+    transform: scale(1.28);
+    transform-origin: bottom center;
 }
 
 
-/* GIRL */
-.girl-character {
-    left: 60%;
+/* Starting positions */
 
+.boy-character {
+    left: 55%;
+}
+
+.girl-character {
+    left: 40%;
     z-index: 11;
 }
 
 
-/* IMPORTANT:
-   Never change character scale while moving */
-.boy-character,
-.girl-character {
-    transform: none;
-}
-
-
-/* =========================
-   MOBILE CHARACTERS
-========================= */
-
-@media (max-width: 700px) {
-
-    .character {
-        width: 90px;
-        height: 125px;
-
-        bottom: 20px;
-
-        transition: left 0.25s ease-out;
-    }
-
-    .character img {
-        width: 82px;
-        height: 108px;
-
-        object-fit: contain;
-        object-position: bottom center;
-    }
-
-    .boy-character,
-    .girl-character {
-        transform: none;
-    }
-}
-
-
-/* =========================
-   SPEECH
-========================= */
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
 
 .speech-bubble {
-    position: relative;
+    position: absolute;
 
-    margin-bottom: 8px;
+    bottom: 158px;
 
-    max-width: 220px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    margin: 0;
 
     background: white;
 
     color: var(--dark-pink);
 
-    padding: 9px 13px;
+    padding: 9px 14px;
 
-    border-radius: 16px;
+    border-radius: 17px;
 
     font-size: 12px;
     font-weight: 600;
@@ -321,9 +285,10 @@ body {
 
     white-space: nowrap;
 
+    z-index: 20;
+
     animation: floating 2.5s ease-in-out infinite;
 }
-
 
 .speech-bubble::after {
     content: "";
@@ -331,7 +296,6 @@ body {
     position: absolute;
 
     bottom: -7px;
-
     left: 50%;
 
     transform: translateX(-50%) rotate(45deg);
@@ -345,23 +309,20 @@ body {
     border-bottom: 1px solid #f0cbd3;
 }
 
-
 @keyframes floating {
-
-    0%,
-    100% {
-        transform: translateY(0);
+    0%, 100% {
+        margin-top: 0;
     }
 
     50% {
-        transform: translateY(-5px);
+        margin-top: -5px;
     }
 }
 
 
-/* =========================
+/* =====================================================
    POOJA
-========================= */
+===================================================== */
 
 .pooja-info {
     position: absolute;
@@ -385,36 +346,26 @@ body {
         0 10px 30px rgba(70,40,20,0.15);
 }
 
-
 .pooja-info > div:first-child {
     font-size: 25px;
-
     margin-bottom: 3px;
 }
 
-
 .pooja-info span {
     font-size: 12px;
-
     color: #79504c;
-
     font-weight: 600;
 }
 
-
 .deities {
     display: flex;
-
     gap: 7px;
-
     justify-content: center;
-
     margin-top: 8px;
 }
 
-
 .deities span {
-    background: #fff;
+    background: white;
 
     padding: 4px 8px;
 
@@ -425,15 +376,14 @@ body {
     color: #9a5b32;
 }
 
-
 .hidden {
     display: none !important;
 }
 
 
-/* =========================
+/* =====================================================
    ACTION MESSAGE
-========================= */
+===================================================== */
 
 .action-message {
     position: absolute;
@@ -454,18 +404,17 @@ body {
     color: var(--dark-pink);
 
     font-weight: 700;
-
     font-size: 14px;
 
     box-shadow:
         0 10px 35px rgba(60,20,30,0.15);
 
     animation: pop 0.35s ease;
+
+    white-space: nowrap;
 }
 
-
 @keyframes pop {
-
     0% {
         opacity: 0;
         transform: translateX(-50%) scale(0.8);
@@ -478,32 +427,30 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    BOTTOM CONTROLS
-========================= */
+===================================================== */
 
 .controls {
-    height: 170px;
-
-    background:
-        rgba(255,248,245,0.98);
-
-    border-top: 1px solid rgba(143,64,82,0.12);
-
     position: relative;
 
     z-index: 50;
-}
 
+    background: rgba(255,248,245,0.98);
+
+    border-top: 1px solid rgba(143,64,82,0.12);
+
+    min-height: 0;
+}
 
 .controls-inner {
     height: 100%;
 
-    max-width: 1100px;
+    max-width: 1200px;
 
     margin: auto;
 
-    padding: 18px 24px;
+    padding: 16px 24px;
 
     display: flex;
 
@@ -513,14 +460,14 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    ROOMS
-========================= */
+===================================================== */
 
 .places-section {
     flex: 1;
+    min-width: 0;
 }
-
 
 .section-title {
     font-size: 12px;
@@ -532,45 +479,50 @@ body {
     margin-bottom: 9px;
 }
 
-
 .room-buttons {
     display: flex;
 
     gap: 7px;
 
-    flex-wrap: wrap;
+    overflow-x: auto;
+
+    scrollbar-width: none;
 }
 
+.room-buttons::-webkit-scrollbar {
+    display: none;
+}
 
 .room-button {
+    flex-shrink: 0;
+
     border: 1px solid #efd2d8;
 
     background: white;
 
     color: #794550;
 
-    padding: 9px 12px;
+    padding: 9px 13px;
 
     border-radius: 25px;
 
     font-family: inherit;
 
     font-size: 12px;
-
     font-weight: 600;
 
     cursor: pointer;
 
+    white-space: nowrap;
+
     transition: 0.2s;
 }
-
 
 .room-button:hover {
     transform: translateY(-2px);
 
     border-color: var(--pink);
 }
-
 
 .room-button.active {
     background: var(--dark-pink);
@@ -581,16 +533,16 @@ body {
 }
 
 
-/* =========================
-   CUTE ACTION
-========================= */
+/* =====================================================
+   RIGHT SIDE CONTROLS
+===================================================== */
 
 .action-section {
     display: flex;
-
     align-items: center;
-}
 
+    flex-shrink: 0;
+}
 
 .cute-action {
     border: none;
@@ -606,25 +558,21 @@ body {
     font-family: inherit;
 
     font-size: 12px;
-
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    white-space: nowrap;
 }
-
 
 .cute-action:hover {
     transform: scale(1.04);
-
-    background: #f1c7d0;
 }
 
 
-/* =========================
+/* =====================================================
    MOVEMENT
-========================= */
+===================================================== */
 
 .movement {
     display: flex;
@@ -632,8 +580,9 @@ body {
     align-items: center;
 
     gap: 8px;
-}
 
+    flex-shrink: 0;
+}
 
 .move-button {
     width: 48px;
@@ -653,15 +602,11 @@ body {
 
     box-shadow:
         0 5px 15px rgba(100,30,50,0.18);
-
-    transition: 0.15s;
 }
-
 
 .move-button:active {
     transform: scale(0.92);
 }
-
 
 .movement-label {
     font-size: 10px;
@@ -672,87 +617,133 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media (max-width: 700px) {
+
+    html,
+    body {
+        height: 100dvh;
+    }
+
+    body {
+        grid-template-rows:
+            60px
+            minmax(0, 1fr)
+            190px;
+    }
+
+
+    /* ---------- TOP ---------- */
 
     .top-bar {
         height: 60px;
 
-        padding: 0 12px;
+        padding: 0 10px;
     }
-
-
-    .home-title span {
-        font-size: 23px;
-    }
-
-
-    .home-title small {
-        font-size: 9px;
-    }
-
 
     .back-button {
-        padding: 7px 10px;
-
+        padding: 7px 11px;
         font-size: 11px;
     }
 
+    .home-title span {
+        font-size: 24px;
+    }
+
+    .home-title small {
+        font-size: 8px;
+    }
 
     .room-name {
-        min-width: auto;
-
+        min-width: 55px;
         font-size: 11px;
     }
 
 
+    /* ---------- WORLD ---------- */
+
     .game-world {
-        height: calc(100vh - 60px - 215px);
-
-        min-height: 350px;
+        min-height: 0;
     }
 
-
-    .character {
-        width: 80px;
-
-        bottom: 20px;
+    .room-background {
+        background-size: cover;
+        background-position: center center;
     }
-
-
-    .character img {
-        width: 78px;
-    }
-
-
-    .speech-bubble {
-        font-size: 10px;
-
-        padding: 7px 9px;
-
-        max-width: 180px;
-    }
-
 
     .love-message {
         top: 12px;
 
-        font-size: 10px;
+        max-width: calc(100% - 30px);
 
         padding: 7px 12px;
+
+        font-size: 10px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
+
+    /* ---------- CHARACTERS ---------- */
+
+    .character {
+        width: 100px;
+        height: 145px;
+
+        bottom: 18px;
+    }
+
+    .character img {
+        width: 100px;
+        height: 125px;
+    }
+
+    /*
+       Keep the girl visually the same size
+       on phones too.
+    */
+    .girl-character img {
+        transform: scale(1.28);
+    }
+
+    .boy-character {
+        left: 57%;
+    }
+
+    .girl-character {
+        left: 35%;
+    }
+
+
+    /* ---------- SPEECH ---------- */
+
+    .speech-bubble {
+        bottom: 130px;
+
+        max-width: 180px;
+
+        padding: 7px 10px;
+
+        font-size: 10px;
+    }
+
+
+    /* ---------- CONTROLS ---------- */
 
     .controls {
-        height: 215px;
+        height: 190px;
+
+        overflow: hidden;
     }
 
-
     .controls-inner {
-        padding: 12px;
+        height: 100%;
+
+        padding: 12px 14px;
 
         display: grid;
 
@@ -760,55 +751,132 @@ body {
 
         grid-template-rows: auto auto;
 
-        gap: 12px;
+        gap: 10px;
     }
 
 
     .places-section {
         grid-column: 1 / 3;
+
+        min-width: 0;
     }
 
+    .section-title {
+        font-size: 11px;
+
+        margin-bottom: 7px;
+    }
 
     .room-buttons {
+        width: 100%;
+
         overflow-x: auto;
 
         flex-wrap: nowrap;
 
-        padding-bottom: 4px;
+        padding-bottom: 3px;
     }
-
 
     .room-button {
-        flex-shrink: 0;
+        padding: 8px 12px;
+
+        font-size: 11px;
     }
 
+
+    /* ---------- CUTE BUTTON ---------- */
 
     .action-section {
         justify-content: flex-start;
+
+        min-width: 0;
     }
 
+    .cute-action {
+        padding: 11px 13px;
+
+        font-size: 11px;
+    }
+
+
+    /* ---------- MOVEMENT ---------- */
 
     .movement {
         justify-content: flex-end;
     }
 
+    .movement-label {
+        display: none;
+    }
 
     .move-button {
-        width: 43px;
-        height: 43px;
+        width: 46px;
+        height: 46px;
+
+        font-size: 21px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    body {
+        grid-template-rows:
+            58px
+            minmax(0, 1fr)
+            180px;
     }
 
-
-    .pooja-info {
-        top: 55px;
-
-        width: 90%;
-
-        padding: 8px;
+    .top-bar {
+        height: 58px;
     }
 
+    .home-title span {
+        font-size: 21px;
+    }
 
-    .deities {
-        flex-wrap: wrap;
+    .home-title small {
+        display: none;
+    }
+
+    .back-button {
+        padding: 6px 9px;
+    }
+
+    .character {
+        width: 88px;
+        height: 130px;
+    }
+
+    .character img {
+        width: 90px;
+        height: 115px;
+    }
+
+    .girl-character img {
+        transform: scale(1.28);
+    }
+
+    .speech-bubble {
+        bottom: 120px;
+        font-size: 9px;
+    }
+
+    .controls {
+        height: 180px;
+    }
+
+    .cute-action {
+        padding: 10px 11px;
+        font-size: 10px;
+    }
+
+    .move-button {
+        width: 42px;
+        height: 42px;
     }
 }
