@@ -1,22 +1,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Our Little Home ♡</title>
 
     <link rel="stylesheet" href="game.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- =========================
-         TOP BAR
-    ========================== -->
+    <!-- ================= TOP BAR ================= -->
 
     <header class="top-bar">
 
@@ -36,29 +38,24 @@
     </header>
 
 
-    <!-- =========================
-         GAME WORLD
-    ========================== -->
+    <!-- ================= GAME WORLD ================= -->
 
     <main class="game-world" id="gameWorld">
 
-        <!-- Room background -->
-        <div
-            class="room-background"
-            id="roomBackground">
-        </div>
+        <div class="room-background" id="roomBackground"></div>
 
-        <!-- Soft overlay -->
         <div class="world-light"></div>
 
 
-        <!-- Top love message -->
+        <!-- TOP LOVE MESSAGE -->
+
         <div class="love-message" id="loveMessage">
             Welcome home, love ♡
         </div>
 
 
-        <!-- Pooja information -->
+        <!-- POOJA INFORMATION -->
+
         <div class="pooja-info hidden" id="poojaInfo">
 
             <div>🪔</div>
@@ -66,65 +63,49 @@
             <span>Let's pray together ♡</span>
 
             <div class="deities">
-                <span>Vishnu</span>
-                <span>Shiva</span>
-                <span>Ganapathi</span>
-                <span>Lakshmi</span>
+                <span>🙏</span>
+                <span>🪷</span>
+                <span>🕉️</span>
+                <span>✨</span>
             </div>
 
         </div>
 
 
-        <!-- =========================
-             BOY
-        ========================== -->
+        <!-- ================= CHARACTERS ================= -->
 
-        <div
-            class="character boy-character"
-            id="boyCharacter">
+        <div class="character boy-character" id="boyCharacter">
 
             <img
-                id="boySprite"
+                id="boyImage"
                 src="game-assets/characters/boy/boy-front.png"
-                alt="Boy character">
+                alt="Boy">
 
         </div>
 
 
-        <!-- =========================
-             GIRL
-        ========================== -->
+        <div class="character girl-character" id="girlCharacter">
 
-        <div
-            class="character girl-character"
-            id="girlCharacter">
-
-            <div
-                class="speech-bubble"
-                id="girlSpeech">
+            <div class="speech-bubble" id="girlSpeech">
                 I'm coming with you 🥰
             </div>
 
             <img
-                id="girlSprite"
+                id="girlImage"
                 src="game-assets/characters/girl/girl-front.png"
-                alt="Girl character">
+                alt="Girl">
 
         </div>
 
 
-        <!-- Cute action message -->
-        <div
-            class="action-message hidden"
-            id="actionMessage">
-        </div>
+        <!-- ACTION MESSAGE -->
+
+        <div class="action-message hidden" id="actionMessage"></div>
 
     </main>
 
 
-    <!-- =========================
-         CONTROLS
-    ========================== -->
+    <!-- ================= CONTROLS ================= -->
 
     <section class="controls">
 
@@ -139,34 +120,29 @@
                     Go somewhere ♡
                 </div>
 
-                <div class="room-buttons" id="roomButtons">
+                <div class="room-buttons">
 
-                    <button
-                        class="room-button active"
+                    <button class="room-button active"
                         data-room="hall">
                         🛋️ Hall
                     </button>
 
-                    <button
-                        class="room-button"
+                    <button class="room-button"
                         data-room="kitchen">
                         🍳 Kitchen
                     </button>
 
-                    <button
-                        class="room-button"
+                    <button class="room-button"
                         data-room="bedroom">
                         🛏️ Bedroom
                     </button>
 
-                    <button
-                        class="room-button"
+                    <button class="room-button"
                         data-room="bathroom">
                         🚿 Bathroom
                     </button>
 
-                    <button
-                        class="room-button"
+                    <button class="room-button"
                         data-room="pooja">
                         🪔 Pooja
                     </button>
@@ -176,45 +152,39 @@
             </div>
 
 
-            <!-- BOTTOM ACTIONS -->
+            <!-- ACTION -->
 
-            <div class="bottom-controls">
+            <div class="action-section">
 
-
-                <!-- Cute action -->
-
-                <button
-                    class="cute-action"
-                    id="cuteAction">
+                <button class="cute-action" id="cuteAction">
                     ✨ Do something cute
                 </button>
 
+            </div>
 
-                <!-- Movement -->
 
-                <div class="movement">
+            <!-- MOVEMENT -->
 
-                    <button
-                        class="move-button"
-                        id="moveLeft"
-                        aria-label="Move left">
-                        ←
-                    </button>
+            <div class="movement">
 
-                    <span class="movement-label">
-                        Move
-                    </span>
+                <button class="move-button"
+                    id="moveLeft"
+                    aria-label="Move left">
+                    ←
+                </button>
 
-                    <button
-                        class="move-button"
-                        id="moveRight"
-                        aria-label="Move right">
-                        →
-                    </button>
+                <span class="movement-label">
+                    MOVE
+                </span>
 
-                </div>
+                <button class="move-button"
+                    id="moveRight"
+                    aria-label="Move right">
+                    →
+                </button>
 
             </div>
+
 
         </div>
 
