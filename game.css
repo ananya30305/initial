@@ -451,76 +451,76 @@ body {
     }
 
     .top-bar {
-        height: 46px;
-        padding: 0 8px;
+        height: 44px;
+        padding: 0 6px;
     }
 
     .back-button {
-        padding: 4px 8px;
-        font-size: 11px;
+        padding: 3px 7px;
+        font-size: 10px;
     }
 
     .home-title span {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .home-title small {
-        font-size: 7px;
+        display: none;
     }
 
     .room-name {
-        min-width: 50px;
-        font-size: 11px;
+        min-width: 45px;
+        font-size: 10px;
     }
 
-    /* Game world height calculated precisely so control panel fits fully on screen */
+    /* Keep game world properly proportioned so control bar fits fully */
     .game-world {
-        height: calc(100vh - 46px - 110px);
+        height: calc(100vh - 44px - 105px);
         min-height: 0;
     }
 
-    /* Clean mobile character sizing matching identical uniform height */
+    /* Uniform character sizing on mobile */
     .character {
-        width: 100px;
-        height: 140px;
-        bottom: 6px;
+        width: 90px;
+        height: 125px;
+        bottom: 5px;
     }
 
     .character img {
-        width: 100px;
-        height: 130px;
+        width: 90px;
+        height: 115px;
     }
 
     .speech-bubble {
-        bottom: 125px;
-        font-size: 9px;
-        padding: 3px 6px;
+        bottom: 110px;
+        font-size: 8px;
+        padding: 2px 5px;
     }
 
     .action-message {
-        bottom: 26%;
-        font-size: 10px;
-        padding: 5px 10px;
+        bottom: 25%;
+        font-size: 9px;
+        padding: 5px 8px;
     }
 
-    /* Fix Pooja info box position on mobile so it stays safely at top */
+    /* Safe positioning for Pooja info box so it stays at the top */
     .pooja-info {
-        top: 36px;
-        padding: 4px 8px;
-        transform: translateX(-50%) scale(0.8);
+        top: 32px;
+        padding: 3px 6px;
+        transform: translateX(-50%) scale(0.75);
     }
 
-    /* Extremely compact control panel height so move buttons are guaranteed visible */
+    /* Compact control panel height ensuring move buttons are fully visible */
     .controls {
-        height: 110px;
+        height: 105px;
     }
 
     .controls-inner {
-        padding: 5px 8px;
+        padding: 4px 6px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 3px;
+        gap: 2px;
     }
 
     .places-section {
@@ -538,9 +538,9 @@ body {
     }
 
     .room-button {
-        padding: 3px 7px;
+        padding: 2px 6px;
         font-size: 9px;
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
     .bottom-action-row {
@@ -554,7 +554,7 @@ body {
     .action-section {
         display: flex;
         align-items: center;
-        gap: 3px;
+        gap: 2px;
         overflow-x: auto;
         flex: 1;
         min-width: 0;
@@ -567,15 +567,15 @@ body {
     }
 
     .cute-action {
-        padding: 4px 7px;
-        font-size: 9px;
-        min-height: 28px;
-        border-radius: 10px;
+        padding: 3px 6px;
+        font-size: 8px;
+        min-height: 24px;
+        border-radius: 8px;
         flex-shrink: 0;
     }
 
     .movement {
-        gap: 3px;
+        gap: 2px;
         flex-shrink: 0;
     }
 
@@ -584,8 +584,8 @@ body {
     }
 
     .move-button {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
     }
 }
