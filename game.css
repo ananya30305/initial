@@ -22,13 +22,14 @@ html,
 body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    position: fixed; /* Prevents mobile scroll bouncing */
 }
 
 body {
     font-family: "DM Sans", sans-serif;
     background: var(--cream);
     color: var(--brown);
-    overflow: hidden;
     touch-action: manipulation;
 }
 
@@ -37,16 +38,15 @@ body {
 ========================= */
 
 .top-bar {
-    height: 64px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 12px;
     background: rgba(255, 248, 245, 0.97);
     border-bottom: 1px solid rgba(143, 64, 82, 0.15);
     position: relative;
     z-index: 50;
-    backdrop-filter: blur(12px);
     flex-shrink: 0;
 }
 
@@ -55,9 +55,9 @@ body {
     color: var(--dark-pink);
     background: #fff;
     border: 1px solid #efd4da;
-    padding: 7px 14px;
-    border-radius: 30px;
-    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -70,23 +70,22 @@ body {
 .home-title span {
     display: block;
     font-family: "Great Vibes", cursive;
-    font-size: 26px;
+    font-size: 22px;
     color: var(--dark-pink);
     white-space: nowrap;
 }
 
 .home-title small {
     display: block;
-    font-size: 10px;
+    font-size: 9px;
     color: #a8757e;
-    letter-spacing: 1px;
-    margin-top: 1px;
+    letter-spacing: 0.5px;
 }
 
 .room-name {
-    min-width: 75px;
+    min-width: 60px;
     text-align: right;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--dark-pink);
     white-space: nowrap;
@@ -98,8 +97,8 @@ body {
 
 .game-world {
     position: relative;
-    height: calc(100vh - 64px - 210px);
-    min-height: 320px;
+    width: 100%;
+    height: calc(100vh - 54px - 165px);
     overflow: hidden;
     background: #eadbd5;
 }
@@ -111,7 +110,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     z-index: 0;
-    transition: background-image 0.4s ease;
 }
 
 .world-light {
@@ -132,30 +130,30 @@ body {
 
 .love-message {
     position: absolute;
-    top: 12px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255,255,255,0.90);
-    padding: 7px 15px;
-    border-radius: 30px;
+    background: rgba(255,255,255,0.92);
+    padding: 5px 12px;
+    border-radius: 20px;
     color: var(--dark-pink);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    box-shadow: 0 6px 20px rgba(80,30,40,0.12);
+    box-shadow: 0 4px 15px rgba(80,30,40,0.1);
     z-index: 20;
     white-space: nowrap;
     pointer-events: none;
 }
 
 /* =========================
-   CHARACTERS (UNIFORM & NATURAL SPACING)
+   CHARACTERS
 ========================= */
 
 .character {
     position: absolute;
-    bottom: 20px;
-    width: 140px;
-    height: 190px;
+    bottom: 10px;
+    width: 120px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,12 +163,12 @@ body {
 }
 
 .character img {
-    width: 140px;
-    height: 175px;
+    width: 120px;
+    height: 150px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
-    filter: drop-shadow(0 10px 8px rgba(50,20,20,0.22));
+    filter: drop-shadow(0 8px 6px rgba(50,20,20,0.2));
 }
 
 .boy-character {
@@ -187,80 +185,61 @@ body {
 
 .speech-bubble {
     position: absolute;
-    bottom: 175px;
+    bottom: 150px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
     color: var(--dark-pink);
-    padding: 7px 11px;
-    border-radius: 14px;
-    font-size: 11px;
+    padding: 5px 9px;
+    border-radius: 12px;
+    font-size: 10px;
     font-weight: 600;
-    box-shadow: 0 6px 20px rgba(70,20,30,0.15);
+    box-shadow: 0 4px 15px rgba(70,20,30,0.15);
     border: 1px solid #f0cbd3;
     white-space: nowrap;
     z-index: 30;
-    animation: floating 2.5s ease-in-out infinite;
-}
-
-.speech-bubble::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-right: 1px solid #f0cbd3;
-    border-bottom: 1px solid #f0cbd3;
-}
-
-@keyframes floating {
-    0%, 100% { margin-top: 0; }
-    50% { margin-top: -4px; }
 }
 
 /* =========================
-   POOJA
+   POOJA INFO
 ========================= */
 
 .pooja-info {
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
     text-align: center;
-    background: rgba(255,250,242,0.93);
-    padding: 8px 14px;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(70,40,20,0.15);
+    background: rgba(255,250,242,0.95);
+    padding: 6px 12px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(70,40,20,0.15);
 }
 
 .pooja-info > div:first-child {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 18px;
+    margin-bottom: 1px;
 }
 
 .pooja-info span {
-    font-size: 11px;
+    font-size: 10px;
     color: #79504c;
     font-weight: 600;
 }
 
 .deities {
     display: flex;
-    gap: 6px;
+    gap: 4px;
     justify-content: center;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 .deities span {
     background: #fff;
-    padding: 3px 6px;
-    border-radius: 18px;
-    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 12px;
+    font-size: 9px;
     color: #9a5b32;
 }
 
@@ -271,23 +250,17 @@ body {
 .action-message {
     position: absolute;
     left: 50%;
-    bottom: 35%;
+    bottom: 28%;
     transform: translateX(-50%);
     z-index: 30;
     background: rgba(255,255,255,0.95);
-    padding: 10px 15px;
-    border-radius: 22px;
+    padding: 8px 14px;
+    border-radius: 18px;
     color: var(--dark-pink);
     font-weight: 700;
-    font-size: 12px;
-    box-shadow: 0 8px 30px rgba(60,20,30,0.15);
-    animation: pop 0.3s ease;
+    font-size: 11px;
+    box-shadow: 0 6px 25px rgba(60,20,30,0.15);
     white-space: nowrap;
-}
-
-@keyframes pop {
-    0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
-    100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
 .hidden {
@@ -295,11 +268,11 @@ body {
 }
 
 /* =========================
-   BOTTOM CONTROLS (FIT ALL BUTTONS ON MOBILE)
+   BOTTOM CONTROLS (COMPACT FOR MOBILE)
 ========================= */
 
 .controls {
-    height: 210px;
+    height: 165px;
     background: rgba(255,248,245,0.99);
     border-top: 1px solid rgba(143,64,82,0.12);
     position: relative;
@@ -310,34 +283,26 @@ body {
 .controls-inner {
     width: 100%;
     height: 100%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 10px 12px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 6px;
 }
-
-/* =========================
-   ROOMS
-========================= */
 
 .places-section {
     width: 100%;
-    min-width: 0;
 }
 
 .section-title {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: #95616b;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .room-buttons {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 2px;
@@ -354,14 +319,12 @@ body {
     border: 1px solid #efd2d8;
     background: white;
     color: #794550;
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-family: inherit;
-    font-size: 11px;
+    padding: 5px 9px;
+    border-radius: 16px;
+    font-size: 10px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
-    transition: 0.2s;
 }
 
 .room-button.active {
@@ -371,16 +334,24 @@ body {
 }
 
 /* =========================
-   ACTIONS & MOVEMENT ROW
+   BOTTOM ROW (ACTIONS + ARROWS)
 ========================= */
+
+.bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+}
 
 .action-section {
     display: flex;
     align-items: center;
-    gap: 5px;
-    flex-wrap: nowrap;
+    gap: 4px;
     overflow-x: auto;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     padding-bottom: 2px;
     scrollbar-width: none;
 }
@@ -393,16 +364,14 @@ body {
     border: none;
     background: var(--soft-pink);
     color: var(--dark-pink);
-    padding: 8px 11px;
-    border-radius: 20px;
-    font-family: inherit;
+    padding: 6px 9px;
+    border-radius: 16px;
     font-size: 10px;
     font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
-    min-height: 36px;
-    box-shadow: 0 3px 10px rgba(143,64,82,0.08);
+    box-shadow: 0 2px 6px rgba(143,64,82,0.08);
 }
 
 #hugAction {
@@ -413,69 +382,28 @@ body {
     background: #fce4ec;
 }
 
-/* =========================
-   MOVEMENT ROW
-========================= */
-
-.movement-row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
-    width: 100%;
-}
-
 .movement {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     flex-shrink: 0;
 }
 
 .move-button {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border: none;
     border-radius: 50%;
     background: var(--dark-pink);
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(100,30,50,0.2);
-    touch-action: manipulation;
+    box-shadow: 0 3px 10px rgba(100,30,50,0.2);
 }
 
 .move-button:active {
     transform: scale(0.92);
-}
-
-.movement-label {
-    font-size: 8px;
-    color: #9b737a;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-/* =========================================================
-   MOBILE MEDIA QUERIES
-========================================================= */
-
-@media (max-width: 480px) {
-    .character {
-        width: 125px;
-        height: 170px;
-    }
-
-    .character img {
-        width: 125px;
-        height: 155px;
-    }
-
-    .controls {
-        height: 200px;
-    }
 }
