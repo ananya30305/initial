@@ -467,7 +467,7 @@ body {
         text-align: center !important;
         font-size: 7px !important;
         padding: 4px 8px !important;
-        line-height: 1.2 !important;
+        line-height: 1 !important;
     }
 
     .action-message {
