@@ -764,19 +764,21 @@ body {
     font-size: 0.75rem;
   }
 
-  /* --- FIXED MOBILE CALENDAR POSITIONING & SIZING --- */
+  /* --- ABSOLUTE VIEWPORT CENTERED CALENDAR FIX --- */
   .calendar-trigger-wrapper {
-    position: static; /* Allows the calendar to align neatly within the card bounds */
+    position: static !important;
   }
 
   .calendar-dropdown {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    width: auto;
-    max-width: none;
-    transform: none;
-    padding: 14px;
+    position: fixed !important;
+    top: 50vh !important;
+    left: 50vw !important;
+    transform: translate(-50%, -50%) !important;
+    width: 300px !important;
+    max-width: 92vw !important;
+    z-index: 99999 !important;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4) !important;
+    padding: 16px !important;
   }
 
   .cal-title {
@@ -788,27 +790,3 @@ body {
     font-size: 0.8rem;
   }
 }
-/* --- BULLETPROOF MOBILE CALENDAR FIX --- */
-  .calendar-trigger-wrapper {
-    position: relative;
-  }
-
-  .calendar-dropdown {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translate(-50%, -50%) !important;
-    width: 290px !important;
-    max-width: 90vw !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
-  }
-
-  .cal-title {
-    font-size: 1.3rem;
-  }
-
-  .cal-day-cell {
-    padding: 6px 0;
-    font-size: 0.8rem;
-  }
