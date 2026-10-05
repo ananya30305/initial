@@ -444,19 +444,20 @@ body {
         min-height: 0;
     }
 
-   /* PROPERLY SCALED MOBILE CHARACTERS WITH CLEAR SEPARATION */
+    /* PROPERLY SPACED, UN-GLUED MOBILE CHARACTERS */
     .character {
-        width: 60px;
-        height: 120px;
+        width: 95px;
+        height: 135px;
         bottom: 5px;
     }
 
     .character img {
-        width: 60px;
-        height: 115px; /* Uniform height, smaller width so they never overlap */
+        width: 95px;
+        height: 125px; /* Uniform exact height for both characters */
         object-fit: contain;
         object-position: bottom center;
     }
+
     .speech-bubble {
         bottom: 120px;
         font-size: 8px;

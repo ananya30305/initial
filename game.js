@@ -138,13 +138,13 @@ function getCharacterAssets(roomType) {
 
 
 /* =========================================================
-   SET CHARACTER POSITIONS (WIDE GAP ON MOBILE)
+   SET CHARACTER POSITIONS (RESPONSIVE SEPARATION)
 ========================================================= */
 
 function updateCharacterPositions() {
-    // 22% gap on mobile for a clear visual separation; 8% on desktop
+    // If it's a mobile screen, use a clean 14% gap so they don't look glued; keep desktop at 8%
     const isMobile = window.innerWidth <= 768;
-    const spacingGap = isMobile ? 22 : 8;
+    const spacingGap = isMobile ? 14 : 8;
 
     girlPosition = boyPosition - spacingGap;
     boyCharacter.style.left = boyPosition + "%";
