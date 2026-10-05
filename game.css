@@ -148,7 +148,7 @@ body {
 }
 
 /* =========================
-   CHARACTERS (UNIFORM SIZING)
+   CHARACTERS (DESKTOP DEFAULT)
 ========================= */
 
 .character {
@@ -222,46 +222,11 @@ body {
 }
 
 /* =========================
-   POOJA
+   POOJA (HIDDEN GLOBALLY)
 ========================= */
 
 .pooja-info {
-    position: absolute;
-    top: 75px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    text-align: center;
-    background: rgba(255,250,242,0.93);
-    padding: 12px 18px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(70,40,20,0.15);
-}
-
-.pooja-info > div:first-child {
-    font-size: 25px;
-    margin-bottom: 3px;
-}
-
-.pooja-info span {
-    font-size: 12px;
-    color: #79504c;
-    font-weight: 600;
-}
-
-.deities {
-    display: flex;
-    gap: 7px;
-    justify-content: center;
-    margin-top: 8px;
-}
-
-.deities span {
-    background: #fff;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 10px;
-    color: #9a5b32;
+    display: none !important;
 }
 
 /* =========================
@@ -473,26 +438,29 @@ body {
         font-size: 10px;
     }
 
-    /* Keep game world properly proportioned so control bar fits fully */
+    /* Game world height adjusted so bottom control bar fits fully on screen */
     .game-world {
         height: calc(100vh - 44px - 105px);
         min-height: 0;
     }
 
-    /* Uniform character sizing on mobile */
+    /* UNIFORM & UN-GLUED MOBILE CHARACTERS: 
+       Given distinct width so they don't merge, but identical uniform height. */
     .character {
-        width: 90px;
-        height: 125px;
+        width: 72px;
+        height: 135px;
         bottom: 5px;
     }
 
     .character img {
-        width: 90px;
-        height: 115px;
+        width: 110px; /* Wider image container so individual sprites are fully visible and distinct */
+        height: 125px; /* Uniform exact height for both characters */
+        object-fit: contain;
+        object-position: bottom center;
     }
 
     .speech-bubble {
-        bottom: 110px;
+        bottom: 120px;
         font-size: 8px;
         padding: 2px 5px;
     }
@@ -501,13 +469,6 @@ body {
         bottom: 25%;
         font-size: 9px;
         padding: 5px 8px;
-    }
-
-    /* Safe positioning for Pooja info box so it stays at the top */
-    .pooja-info {
-        top: 32px;
-        padding: 3px 6px;
-        transform: translateX(-50%) scale(0.75);
     }
 
     /* Compact control panel height ensuring move buttons are fully visible */
