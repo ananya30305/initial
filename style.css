@@ -772,7 +772,7 @@ body {
   .calendar-dropdown {
     position: absolute;
     left: 12px;
-    right: 12px;
+    right: 15px;
     width: auto;
     max-width: none;
     transform: none;
@@ -784,7 +784,7 @@ body {
   }
 
   .cal-day-cell {
-    padding: 6px 0;
+    padding: 5px 0;
     font-size: 0.8rem;
   }
 }
