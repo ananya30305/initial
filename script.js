@@ -214,38 +214,25 @@ document.addEventListener('DOMContentLoaded', () => {
       normalStatus = `Good morning sunshine! Tap my picture to flip cards. ☀️`;
       enableCycle = true;
     } else if (inRange(7, 0, 8, 30)) {
-      // 7:00 AM - 8:30 AM: Loop cycle of night.png, morning.png, us.png with 2 sec timer & touch swap
       normalGreeting = `Goodie morning, My Muddu 💕`;
       normalSubtext = `Rise and shine, my love! Enjoy this sweet morning loop.`;
       normalStatus = `Tap my picture or wait to watch the card loop! ☀️`;
       isMorningLoopActive = true;
-    } else if (inRange(8, 31, 10, 30)) {
-      // 8:31 AM - 10:30 AM: Breakfast Time with food.png
+    } else if (inRange(8, 31, 11, 0)) {
       normalGreeting = `Goodie morning, Breakfast Time! 🍳`;
       normalSubtext = `Eat your breakfast well, my muddu kandha!`;
       normalStatus = `Start your morning with delicious food and energy! 🥞`;
       targetImage = "images/food.png";
-    } else if (inRange(10, 31, 11, 0)) {
-      normalGreeting = `Goodie morning, Breakfast Time! 🍳`;
-      normalSubtext = `Eat your breakfast well, my muddu kandha!`;
-      normalStatus = `Start your morning with delicious food and energy! 🥞`;
+    } else if (inRange(13, 0, 15, 0)) {
+      // 1:00 PM to 3:00 PM Lunch Time window
+      normalGreeting = `Lunch Time, My Muddu 🍛`;
+      normalSubtext = `Have a wonderful lunch and eat completely!`;
+      normalStatus = `Take a nice lunch break and refuel yourself. 🍲`;
       targetImage = "images/food.png";
-    } else if (inRange(11, 1, 13, 59)) {
-      if (inRange(13, 0, 15, 0)) {
-        normalGreeting = `Lunch Time, My Muddu 🍛`;
-        normalSubtext = `Have a wonderful lunch and eat completely!`;
-        normalStatus = `Take a nice lunch break and refuel yourself. 🍲`;
-        targetImage = "images/food.png";
-      } else {
-        normalGreeting = `Stay Hydrated, My Hububu 💧`;
-        normalSubtext = `Drink plenty of water right now, kandha!`;
-        normalStatus = `Sip water and keep yourself fresh and hydrated! ✨`;
-        targetImage = "images/us.png";
-      }
-    } else if (inRange(15, 1, 16, 45)) {
-      normalGreeting = `Hydration Break, My Puppu 🥤`;
-      normalSubtext = `Time to drink another glass of water!`;
-      normalStatus = `Hydration check! Drink up, my love. 💙`;
+    } else if (inRange(11, 1, 12, 59) || inRange(15, 1, 16, 45)) {
+      normalGreeting = `Stay Hydrated, My Hububu 💧`;
+      normalSubtext = `Drink plenty of water right now, kandha!`;
+      normalStatus = `Sip water and keep yourself fresh and hydrated! ✨`;
       targetImage = "images/us.png";
     } else if (inRange(16, 46, 19, 0)) {
       normalGreeting = `Time to have some fun snacks kandha... 💕`;
@@ -343,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'birthday',
         note: `Happy Birthday my mudduu Kandhaaa❤️🎂 Today is all about celebrating the most wonderful human in my world!`,
         letterPreview: `Happy Birthday my dearest muddu! I thank my stars every day that you were born...`,
-        letterFull: `My love\n\nHappy Birthday my mudduu marii! 🎂❤️\n\nToday is the most special day of the year because it's the day you entered this world. I am so grateful to be by your side celebrating another year of your beautiful life.\n\nYou bring so much laughter, warmth, and peace into my life. I hope all your dreams come true this year, and I promise to support you and stand by you through every single step.\n\nAlways yours,\nYour Wifey 💖`,
+        letterFull: `My love\n\nHappy Birthday my mudduu marii! 🎂❤️️\n\nToday is the most special day of the year because it's the day you entered this world. I am so grateful to be by your side celebrating another year of your beautiful life.\n\nYou bring so much laughter, warmth, and peace into my life. I hope all your dreams come true this year, and I promise to support you and stand by you through every single step.\n\nAlways yours,\nYour Wifey 💖`,
         status: `Happy Birthday my mudduu kandhaaa! 🎂 Special Audio active!`
       };
     }
