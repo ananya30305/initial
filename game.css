@@ -457,9 +457,10 @@ body {
     }
 
     .speech-bubble {
-        bottom: 200px !important;
-        font-size: 9px;
-        padding: 4px 8px;
+        white-space: normal !important; 
+        max-width: 140px;             
+        text-align: center;
+        line-height: 1.2;
     }
 
     .action-message {
