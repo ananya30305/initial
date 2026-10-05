@@ -76,13 +76,11 @@ const hugAction = document.createElement("button");
 hugAction.className = "cute-action";
 hugAction.id = "hugAction";
 hugAction.innerHTML = "🤗 Hug";
-hugAction.style.marginLeft = "8px";
 actionSection.appendChild(hugAction);
 
 const specialAction = document.createElement("button");
 specialAction.className = "cute-action hidden";
 specialAction.id = "specialAction";
-specialAction.style.marginLeft = "8px";
 actionSection.appendChild(specialAction);
 
 
@@ -156,7 +154,7 @@ function setStandingPosition() {
     if (isSpecialStateActive) return;
 
     girlCharacter.style.display = "flex";
-    boyCharacter.style.width = ""; // Reset width back to default
+    boyCharacter.style.width = ""; 
     boyImage.style.width = "";
     boyImage.style.height = "";
 
@@ -346,7 +344,7 @@ cuteAction.addEventListener("click", () => {
 
 
 /* =========================================================
-   HUG BUTTON LOGIC (LARGER SIZE)
+   HUG BUTTON LOGIC (KEEPS CURRENT POSITION)
 ========================================================= */
 
 hugAction.addEventListener("click", () => {
@@ -354,10 +352,9 @@ hugAction.addEventListener("click", () => {
     isSpecialStateActive = true;
     girlCharacter.style.display = "none"; 
 
-    // Make the display container and image larger for special coupled poses
-    boyCharacter.style.width = "220px";
-    boyImage.style.width = "220px";
-    boyImage.style.height = "250px";
+    boyCharacter.style.width = "180px";
+    boyImage.style.width = "180px";
+    boyImage.style.height = "210px";
 
     let hugImage = "";
     if (currentRoomKey === "hall" || currentRoomKey === "kitchen") {
@@ -382,7 +379,7 @@ hugAction.addEventListener("click", () => {
 
 
 /* =========================================================
-   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - LARGER SIZE)
+   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - KEEPS POSITION)
 ========================================================= */
 
 specialAction.addEventListener("click", () => {
@@ -390,10 +387,9 @@ specialAction.addEventListener("click", () => {
     isSpecialStateActive = true;
     girlCharacter.style.display = "none"; 
 
-    // Make the display container and image larger for special coupled poses
-    boyCharacter.style.width = "220px";
-    boyImage.style.width = "220px";
-    boyImage.style.height = "250px";
+    boyCharacter.style.width = "180px";
+    boyImage.style.width = "180px";
+    boyImage.style.height = "210px";
 
     let specialImage = "";
     let msg = "";
