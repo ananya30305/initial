@@ -1,57 +1,76 @@
+/* =========================================
+   OUR LITTLE HOME
+   Game JavaScript
+========================================= */
 
-/* =====================================================
-   OUR LITTLE HOME GAME
-===================================================== */
 
-
-/* -----------------------------------------------------
-   ROOM ORDER
------------------------------------------------------ */
+/* =========================================
+   ROOM DATA
+========================================= */
 
 const rooms = [
+
     {
-        id: "hall",
         name: "Hall",
-        image: "game-assets/rooms/hall.png",
-        message: "Welcome home, love ♡"
+        image: "game-assets/rooms/hall.jpg",
+
+        message: "Welcome home, love ♡",
+
+        speech: "I'm coming with you 🥰",
+
+        action: "Let's cuddle on the sofa 🥰"
     },
 
     {
-        id: "kitchen",
         name: "Kitchen",
-        image: "game-assets/rooms/kitchen.png",
-        message: "Let's make something yummy 🍳"
+        image: "game-assets/rooms/kitchen.jpg",
+
+        message: "Let's make something yummy 🍳",
+
+        speech: "Wait for me! ❤️",
+
+        action: "I'll cook something for you 🍳"
     },
 
     {
-        id: "bedroom",
         name: "Bedroom",
-        image: "game-assets/rooms/bedroom.png",
-        message: "Our cozy little world ♡"
+        image: "game-assets/rooms/bedroom.jpg",
+
+        message: "Our cozy little room ♡",
+
+        speech: "Come here, sleepyhead 🥺",
+
+        action: "Let's have a cozy moment 🧸"
     },
 
     {
-        id: "bathroom",
         name: "Bathroom",
-        image: "game-assets/rooms/bathroom.png",
-        message: "Getting ready together 🚿"
+        image: "game-assets/rooms/bathroom.jpg",
+
+        message: "Fresh and clean ✨",
+
+        speech: "Why are you following me? 😂",
+
+        action: "Tiny bathroom adventure 🚿"
     },
 
     {
-        id: "pooja",
         name: "Pooja",
-        image: "game-assets/rooms/pooja-room.png",
-        message: "Let's pray together 🪔"
+        image: "game-assets/rooms/pooja-room.jpg",
+
+        message: "Let's pray together 🪔",
+
+        speech: "Come, let's pray together 🙏",
+
+        action: "A little prayer together 🪔"
     }
+
 ];
 
 
-/* -----------------------------------------------------
+/* =========================================
    ELEMENTS
------------------------------------------------------ */
-
-const boy = document.getElementById("boyCharacter");
-const girl = document.getElementById("girlCharacter");
+========================================= */
 
 const roomBackground =
     document.getElementById("roomBackground");
@@ -62,360 +81,672 @@ const roomName =
 const loveMessage =
     document.getElementById("loveMessage");
 
+const boyCharacter =
+    document.getElementById("boyCharacter");
+
+const girlCharacter =
+    document.getElementById("girlCharacter");
+
+const boyImage =
+    document.getElementById("boyImage");
+
+const girlImage =
+    document.getElementById("girlImage");
+
+const girlSpeech =
+    document.getElementById("girlSpeech");
+
 const actionMessage =
     document.getElementById("actionMessage");
 
+const cuteAction =
+    document.getElementById("cuteAction");
 
-/* -----------------------------------------------------
-   GAME POSITION
------------------------------------------------------ */
+const moveLeft =
+    document.getElementById("moveLeft");
+
+const moveRight =
+    document.getElementById("moveRight");
+
+const roomButtons =
+    document.querySelectorAll(".room-button");
+
+
+/* =========================================
+   GAME STATE
+========================================= */
 
 let currentRoom = 0;
 
 
 /*
-   0 = far left
-   100 = far right
+    Both characters move together.
+
+    The numbers represent the CENTER position
+    of the characters in percentage.
 */
-let playerPosition = 55;
+
+let boyPosition = 58;
+
+let girlPosition = 44;
 
 
 /*
-   Girl follows the boy.
+    How much they move per click.
 */
-const girlDistance = 13;
+
+const movementStep = 5;
 
 
-/* -----------------------------------------------------
-   CUTE MESSAGES
------------------------------------------------------ */
+/*
+    Limits before changing rooms.
+*/
 
-const messages = [
-    "Wait for me! ❤️",
-    "I'm coming with you 🥰",
-    "Don't leave me! ♡",
-    "Where are you going? 😭💕",
-    "Let's go together ✨",
-    "I'm right behind you! 💕"
-];
+const RIGHT_EDGE = 88;
+
+const LEFT_EDGE = 10;
 
 
-/* -----------------------------------------------------
-   INITIAL ROOM
------------------------------------------------------ */
+/* =========================================
+   CHARACTER IMAGES
+========================================= */
 
-function loadRoom(index, startingPosition = 55) {
+const boyImages = {
 
-    currentRoom = index;
+    front:
+        "game-assets/characters/boy/boy-front.png",
 
-    const room = rooms[currentRoom];
+    back:
+        "game-assets/characters/boy/boy-back.png",
 
-    roomBackground.style.backgroundImage =
-        `url("${room.image}")`;
+    left:
+        "game-assets/characters/boy/boy-left.png",
 
-    roomName.textContent = room.name;
+    right:
+        "game-assets/characters/boy/boy-right.png",
 
-    loveMessage.textContent = room.message;
+    walkLeft:
+        "game-assets/characters/boy/boy-walk-left.png",
 
-    playerPosition = startingPosition;
+    walkRight:
+        "game-assets/characters/boy/boy-walk-right.png"
 
-    updateCharacters();
+};
 
-    updateRoomButtons();
+
+const girlImages = {
+
+    front:
+        "game-assets/characters/girl/girl-front.png",
+
+    back:
+        "game-assets/characters/girl/girl-back.png",
+
+    left:
+        "game-assets/characters/girl/girl-left.png",
+
+    right:
+        "game-assets/characters/girl/girl-right.png",
+
+    walkLeft:
+        "game-assets/characters/girl/girl-walk-left.png",
+
+    walkRight:
+        "game-assets/characters/girl/girl-walk-right.png"
+
+};
+
+
+/* =========================================
+   INITIAL POSITION
+========================================= */
+
+function setCharacterPositions() {
+
+    boyCharacter.style.left =
+        boyPosition + "%";
+
+    girlCharacter.style.left =
+        girlPosition + "%";
 }
 
 
-/* -----------------------------------------------------
-   UPDATE CHARACTER POSITIONS
------------------------------------------------------ */
+/* =========================================
+   CHARACTER DIRECTION
+========================================= */
 
-function updateCharacters() {
-
-    /*
-       Keep the boy inside the room.
-    */
-
-    playerPosition =
-        Math.max(8, Math.min(92, playerPosition));
-
-
-    /*
-       Girl stays behind him.
-    */
-
-    let girlPosition =
-        playerPosition - girlDistance;
-
-
-    /*
-       Keep girl inside screen too.
-    */
-
-    girlPosition =
-        Math.max(5, Math.min(87, girlPosition));
-
-
-    boy.style.left =
-        `calc(${playerPosition}% - 65px)`;
-
-    girl.style.left =
-        `calc(${girlPosition}% - 65px)`;
-}
-
-
-/* -----------------------------------------------------
-   MOVE CHARACTER
------------------------------------------------------ */
-
-function moveCharacter(direction) {
-
-    const step = 5;
-
-
-    if (direction === "right") {
-
-        playerPosition += step;
-
-
-        /*
-           RIGHT EDGE
-           Go to next room.
-        */
-
-        if (playerPosition >= 90) {
-
-            if (currentRoom < rooms.length - 1) {
-
-                currentRoom++;
-
-                loadRoom(
-                    currentRoom,
-                    12
-                );
-
-                showAction(
-                    `Entering ${rooms[currentRoom].name} ♡`
-                );
-
-                return;
-            }
-
-            /*
-               Last room:
-               don't leave the home.
-            */
-
-            playerPosition = 90;
-
-            showAction("There's nowhere else to go ♡");
-        }
-    }
-
+function setCharacterDirection(direction) {
 
     if (direction === "left") {
 
-        playerPosition -= step;
+        boyImage.src =
+            boyImages.walkLeft;
+
+        girlImage.src =
+            girlImages.walkLeft;
+
+    }
+
+    else if (direction === "right") {
+
+        boyImage.src =
+            boyImages.walkRight;
+
+        girlImage.src =
+            girlImages.walkRight;
+
+    }
+
+}
+
+
+/* =========================================
+   IDLE CHARACTER
+========================================= */
+
+function setIdleDirection(direction) {
+
+    if (direction === "left") {
+
+        boyImage.src =
+            boyImages.left;
+
+        girlImage.src =
+            girlImages.left;
+
+    }
+
+    else if (direction === "right") {
+
+        boyImage.src =
+            boyImages.right;
+
+        girlImage.src =
+            girlImages.right;
+
+    }
+
+}
+
+
+/* =========================================
+   MOVE CHARACTERS
+========================================= */
+
+function moveCharacters(direction) {
+
+    /*
+        Change to walking sprite
+    */
+
+    setCharacterDirection(direction);
+
+
+    /*
+        RIGHT
+    */
+
+    if (direction === "right") {
+
+        boyPosition += movementStep;
+
+        girlPosition += movementStep;
 
 
         /*
-           LEFT EDGE
-           Go to previous room.
+            Reached right edge.
+            Move into next room.
         */
 
-        if (playerPosition <= 8) {
+        if (boyPosition >= RIGHT_EDGE) {
 
-            if (currentRoom > 0) {
+            changeRoom(1);
 
-                currentRoom--;
-
-                loadRoom(
-                    currentRoom,
-                    88
-                );
-
-                showAction(
-                    `Going back to ${rooms[currentRoom].name} ♡`
-                );
-
-                return;
-            }
-
-            /*
-               First room:
-               don't leave the home.
-            */
-
-            playerPosition = 8;
-
-            showAction("Let's stay home ♡");
+            return;
         }
+
     }
-
-
-    updateCharacters();
 
 
     /*
-       Occasionally change speech.
+        LEFT
     */
 
-    if (Math.random() > 0.72) {
+    if (direction === "left") {
 
-        const randomMessage =
-            messages[
-                Math.floor(
-                    Math.random() * messages.length
-                )
-            ];
+        boyPosition -= movementStep;
 
-        showAction(randomMessage);
+        girlPosition -= movementStep;
+
+
+        /*
+            Reached left edge.
+            Move into previous room.
+        */
+
+        if (boyPosition <= LEFT_EDGE) {
+
+            changeRoom(-1);
+
+            return;
+        }
+
     }
+
+
+    /*
+        Update positions
+    */
+
+    setCharacterPositions();
+
+
+    /*
+        Return to normal standing image
+        after walking.
+    */
+
+    setTimeout(() => {
+
+        setIdleDirection(direction);
+
+    }, 180);
+
 }
 
 
-/* -----------------------------------------------------
-   CHANGE ROOM FROM BUTTON
------------------------------------------------------ */
+/* =========================================
+   CHANGE ROOM
+========================================= */
 
-function switchRoom(index) {
+function changeRoom(direction) {
 
     /*
-       Allow buttons to directly open a room.
+        Calculate next room
     */
 
-    if (typeof index !== "number") {
+    currentRoom += direction;
 
-        index = rooms.findIndex(
-            room => room.id === index
+
+    /*
+        If moving right from last room,
+        return to Hall.
+    */
+
+    if (currentRoom >= rooms.length) {
+
+        currentRoom = 0;
+
+    }
+
+
+    /*
+        If moving left from Hall,
+        go to Pooja.
+    */
+
+    if (currentRoom < 0) {
+
+        currentRoom = rooms.length - 1;
+
+    }
+
+
+    /*
+        When entering from LEFT:
+
+        characters appear near LEFT side.
+
+        When entering from RIGHT:
+
+        characters appear near RIGHT side.
+    */
+
+    if (direction === 1) {
+
+        boyPosition = 15;
+
+        girlPosition = 7;
+
+    }
+
+    else {
+
+        boyPosition = 85;
+
+        girlPosition = 77;
+
+    }
+
+
+    loadRoom();
+
+}
+
+
+/* =========================================
+   LOAD ROOM
+========================================= */
+
+function loadRoom() {
+
+    const room =
+        rooms[currentRoom];
+
+
+    /*
+        Change background
+    */
+
+    roomBackground.style.opacity = "0.15";
+
+
+    setTimeout(() => {
+
+        roomBackground.style.backgroundImage =
+            `url("${room.image}")`;
+
+        roomBackground.style.opacity = "1";
+
+    }, 120);
+
+
+    /*
+        Text
+    */
+
+    roomName.textContent =
+        room.name;
+
+    loveMessage.textContent =
+        room.message;
+
+    girlSpeech.textContent =
+        room.speech;
+
+
+    /*
+        Update buttons
+    */
+
+    roomButtons.forEach((button, index) => {
+
+        button.classList.toggle(
+            "active",
+            index === currentRoom
         );
-    }
 
+    });
 
-    if (index < 0 || index >= rooms.length) {
-        return;
-    }
-
-
-    loadRoom(index, 55);
-}
-
-
-/* -----------------------------------------------------
-   ACTION MESSAGE
------------------------------------------------------ */
-
-function showAction(message) {
-
-    if (!actionMessage) {
-        return;
-    }
-
-    actionMessage.textContent = message;
-
-    actionMessage.classList.remove("hidden");
 
     /*
-       Restart animation.
+        Put characters in position
     */
 
-    actionMessage.style.animation = "none";
-
-    void actionMessage.offsetWidth;
-
-    actionMessage.style.animation =
-        "pop 0.35s ease";
+    setCharacterPositions();
 
 
-    clearTimeout(
-        window.actionTimeout
-    );
+    /*
+        Make them face front
+    */
+
+    boyImage.src =
+        boyImages.front;
+
+    girlImage.src =
+        girlImages.front;
 
 
-    window.actionTimeout =
-        setTimeout(() => {
+    /*
+        Hide action message
+    */
 
-            actionMessage.classList.add("hidden");
+    hideActionMessage();
 
-        }, 2200);
+
+    /*
+        Scroll active room button into view
+    */
+
+    const activeButton =
+        roomButtons[currentRoom];
+
+    if (activeButton) {
+
+        activeButton.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "nearest",
+
+            inline: "center"
+
+        });
+
+    }
+
 }
 
 
-/* -----------------------------------------------------
-   ROOM BUTTON ACTIVE STATE
------------------------------------------------------ */
+/* =========================================
+   DIRECT ROOM BUTTON
+========================================= */
 
-function updateRoomButtons() {
+roomButtons.forEach((button) => {
 
-    const buttons =
-        document.querySelectorAll(".room-button");
+    button.addEventListener("click", () => {
+
+        const selectedRoom =
+            Number(button.dataset.room);
 
 
-    buttons.forEach(
-        (button, index) => {
+        /*
+            If same room, do nothing.
+        */
 
-            button.classList.toggle(
-                "active",
-                index === currentRoom
-            );
+        if (selectedRoom === currentRoom) {
+
+            return;
+
         }
+
+
+        currentRoom =
+            selectedRoom;
+
+
+        /*
+            Place characters in the middle
+            when user directly selects room.
+        */
+
+        boyPosition = 58;
+
+        girlPosition = 44;
+
+
+        loadRoom();
+
+    });
+
+});
+
+
+/* =========================================
+   CUTE ACTION
+========================================= */
+
+cuteAction.addEventListener("click", () => {
+
+    const room =
+        rooms[currentRoom];
+
+
+    actionMessage.textContent =
+        room.action;
+
+
+    actionMessage.classList.remove(
+        "hidden"
     );
+
+
+    /*
+        Change girl's speech too.
+    */
+
+    girlSpeech.textContent =
+        room.action;
+
+
+    /*
+        Hide automatically.
+    */
+
+    setTimeout(() => {
+
+        hideActionMessage();
+
+    }, 2500);
+
+});
+
+
+/* =========================================
+   HIDE ACTION
+========================================= */
+
+function hideActionMessage() {
+
+    actionMessage.classList.add(
+        "hidden"
+    );
+
 }
 
 
-/* -----------------------------------------------------
-   CUTE ACTION BUTTON
------------------------------------------------------ */
+/* =========================================
+   MOVEMENT BUTTONS
+========================================= */
 
-function doSomethingCute() {
+moveLeft.addEventListener(
+    "click",
+    () => {
 
-    const cuteMessages = [
-        "Come here, love 🥰",
-        "I love you ❤️",
-        "Give me a hug! 🤗",
-        "You're my favourite person ♡",
-        "Let's stay home together 🏡💕",
-        "You + me = home ✨"
-    ];
+        moveCharacters("left");
+
+    }
+);
 
 
-    const message =
-        cuteMessages[
-            Math.floor(
-                Math.random() *
-                cuteMessages.length
-            )
-        ];
+moveRight.addEventListener(
+    "click",
+    () => {
+
+        moveCharacters("right");
+
+    }
+);
 
 
-    showAction(message);
-}
-
-
-/* -----------------------------------------------------
+/* =========================================
    KEYBOARD SUPPORT
------------------------------------------------------ */
+========================================= */
 
 document.addEventListener(
     "keydown",
     (event) => {
 
-        if (event.key === "ArrowLeft") {
+        if (
+            event.key === "ArrowLeft"
+        ) {
 
-            moveCharacter("left");
+            moveCharacters("left");
+
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            moveCharacters("right");
 
         }
 
-        if (event.key === "ArrowRight") {
-
-            moveCharacter("right");
-
-        }
     }
 );
 
 
-/* -----------------------------------------------------
-   START GAME
------------------------------------------------------ */
+/* =========================================
+   TOUCH / MOBILE SWIPE
+========================================= */
 
-loadRoom(0, 55);
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+document
+    .getElementById("gameWorld")
+    .addEventListener(
+        "touchstart",
+        (event) => {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+document
+    .getElementById("gameWorld")
+    .addEventListener(
+        "touchend",
+        (event) => {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+
+            const difference =
+                touchEndX - touchStartX;
+
+
+            /*
+                Swipe left
+            */
+
+            if (difference < -50) {
+
+                moveCharacters("right");
+
+            }
+
+
+            /*
+                Swipe right
+            */
+
+            if (difference > 50) {
+
+                moveCharacters("left");
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+/* =========================================
+   START GAME
+========================================= */
+
+loadRoom();
