@@ -3,12 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Our Little Home ♡</title>
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -21,193 +22,241 @@
 
 <body>
 
-    <!-- =========================
-         TOP BAR
-    ========================== -->
+    <main class="game-page">
 
-    <header class="top-bar">
+        <!-- =========================
+             TOP BAR
+        ========================== -->
 
-        <a href="index.html" class="back-button">
-            ← <span>Back</span>
-        </a>
+        <header class="top-bar">
 
-        <div class="home-title">
-            <span>Our Little Home</span>
-            <small>just you & me ♡</small>
-        </div>
+            <a href="index.html" class="back-button">
+                ← <span>Back</span>
+            </a>
 
-        <div class="room-name" id="roomName">
-            Hall
-        </div>
+            <div class="home-title">
+                <span>Our Little Home</span>
+                <small>just you & me ♡</small>
+            </div>
 
-    </header>
+            <div class="room-name" id="currentRoomLabel">
+                Hall
+            </div>
 
-
-    <!-- =========================
-         GAME WORLD
-    ========================== -->
-
-    <main class="game-world" id="gameWorld">
-
-        <!-- Room -->
-        <div
-            class="room-background"
-            id="roomBackground">
-        </div>
-
-        <!-- Soft overlay -->
-        <div class="world-light"></div>
-
-
-        <!-- Top love message -->
-        <div class="love-message" id="loveMessage">
-            Welcome home, love ♡
-        </div>
+        </header>
 
 
         <!-- =========================
-             BOY
+             GAME WORLD
         ========================== -->
 
-        <div
-            class="character boy-character"
-            id="boyCharacter">
+        <section class="game-world" id="gameWorld">
 
-            <img
-                id="boyImage"
-                class="character-img"
-                src="game-assets/characters/boy/boy-front.png"
-                alt="Boy">
+            <!-- Room image -->
+            <div
+                class="room-background"
+                id="roomBackground">
+            </div>
 
-        </div>
+            <!-- Soft overlay -->
+            <div class="world-light"></div>
 
 
-        <!-- =========================
-             GIRL
-        ========================== -->
+            <!-- Top love message -->
+            <div class="love-message" id="loveMessage">
+                Welcome home, love ♡
+            </div>
 
-        <div
-            class="character girl-character"
-            id="girlCharacter">
+
+            <!-- =========================
+                 POOJA INFORMATION
+            ========================== -->
 
             <div
-                class="speech-bubble"
-                id="girlSpeech">
-                I'm coming with you 🥰
-            </div>
+                class="pooja-info hidden"
+                id="poojaInfo">
 
-            <img
-                id="girlImage"
-                class="character-img"
-                src="game-assets/characters/girl/girl-front.png"
-                alt="Girl">
+                <div>🪔</div>
 
-        </div>
-
-
-        <!-- Action message -->
-        <div
-            class="action-message hidden"
-            id="actionMessage">
-        </div>
-
-    </main>
-
-
-    <!-- =========================
-         CONTROLS
-    ========================== -->
-
-    <section class="controls">
-
-        <div class="controls-inner">
-
-
-            <!-- ROOMS -->
-
-            <div class="places-section">
-
-                <div class="section-title">
-                    Go somewhere ♡
-                </div>
-
-                <div class="room-buttons" id="roomButtons">
-
-                    <button
-                        class="room-button active"
-                        data-room="0">
-                        🛋️ Hall
-                    </button>
-
-                    <button
-                        class="room-button"
-                        data-room="1">
-                        🍳 Kitchen
-                    </button>
-
-                    <button
-                        class="room-button"
-                        data-room="2">
-                        🛏️ Bedroom
-                    </button>
-
-                    <button
-                        class="room-button"
-                        data-room="3">
-                        🚿 Bathroom
-                    </button>
-
-                    <button
-                        class="room-button"
-                        data-room="4">
-                        🪔 Pooja
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- CUTE ACTION -->
-
-            <div class="action-section">
-
-                <button
-                    class="cute-action"
-                    id="cuteAction">
-                    ✨ Do something cute
-                </button>
-
-            </div>
-
-
-            <!-- MOVEMENT -->
-
-            <div class="movement">
-
-                <button
-                    class="move-button"
-                    id="moveLeft"
-                    aria-label="Move left">
-                    ←
-                </button>
-
-                <span class="movement-label">
-                    Move
+                <span>
+                    Let's pray together ♡
                 </span>
 
-                <button
-                    class="move-button"
-                    id="moveRight"
-                    aria-label="Move right">
-                    →
-                </button>
+                <div class="deities">
+                    <span>🕉️</span>
+                    <span>🙏</span>
+                    <span>🌸</span>
+                    <span>✨</span>
+                </div>
 
             </div>
 
-        </div>
 
-    </section>
+            <!-- =========================
+                 GIRL
+            ========================== -->
+
+            <div
+                class="character girl-character"
+                id="girlCharacter">
+
+                <div
+                    class="speech-bubble"
+                    id="girlSpeech">
+                    I'm coming with you 🥰
+                </div>
+
+                <img
+                    src="game-assets/characters/girl/girl-front.png"
+                    alt="Girl character"
+                    draggable="false">
+
+            </div>
+
+
+            <!-- =========================
+                 BOY
+            ========================== -->
+
+            <div
+                class="character boy-character"
+                id="boyCharacter">
+
+                <div
+                    class="speech-bubble hidden"
+                    id="boySpeech">
+                    Wait for me! ❤️
+                </div>
+
+                <img
+                    src="game-assets/characters/boy/boy-front.png"
+                    alt="Boy character"
+                    draggable="false">
+
+            </div>
+
+
+            <!-- Temporary action message -->
+            <div
+                class="action-message hidden"
+                id="actionMessage">
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             BOTTOM CONTROLS
+        ========================== -->
+
+        <section class="controls">
+
+            <div class="controls-inner">
+
+
+                <!-- =========================
+                     ROOMS
+                ========================== -->
+
+                <div class="places-section">
+
+                    <div class="section-title">
+                        Go somewhere ♡
+                    </div>
+
+                    <div class="room-buttons">
+
+                        <button
+                            class="room-button active"
+                            data-room="hall"
+                            onclick="goToRoom('hall')">
+                            🛋️ Hall
+                        </button>
+
+                        <button
+                            class="room-button"
+                            data-room="kitchen"
+                            onclick="goToRoom('kitchen')">
+                            🍳 Kitchen
+                        </button>
+
+                        <button
+                            class="room-button"
+                            data-room="bedroom"
+                            onclick="goToRoom('bedroom')">
+                            🛏️ Bedroom
+                        </button>
+
+                        <button
+                            class="room-button"
+                            data-room="bathroom"
+                            onclick="goToRoom('bathroom')">
+                            🚿 Bathroom
+                        </button>
+
+                        <button
+                            class="room-button"
+                            data-room="pooja"
+                            onclick="goToRoom('pooja')">
+                            🪔 Pooja
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     ACTION
+                ========================== -->
+
+                <div class="action-section">
+
+                    <button
+                        class="cute-action"
+                        id="cuteAction"
+                        onclick="doSomethingCute()">
+
+                        ✨ Do something cute
+
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     MOVEMENT
+                ========================== -->
+
+                <div class="movement">
+
+                    <button
+                        class="move-button"
+                        id="leftButton"
+                        onclick="moveCharacter('left')"
+                        aria-label="Move left">
+                        ←
+                    </button>
+
+                    <span class="movement-label">
+                        Move
+                    </span>
+
+                    <button
+                        class="move-button"
+                        id="rightButton"
+                        onclick="moveCharacter('right')"
+                        aria-label="Move right">
+                        →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 
     <script src="game.js"></script>
