@@ -135,27 +135,31 @@ function getCharacterAssets(roomType) {
         };
     }
 }
-
-
-/* =========================================================
-   SET CHARACTER POSITIONS (FIXED PIXEL SEPARATION ON MOBILE)
+ /* =========================================================
+   UPDATE SPEECH BUBBLE POSITION TO FOLLOW GIRL CHARACTER
 ========================================================= */
 
 function updateCharacterPositions() {
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-        // On mobile, use a fixed pixel offset so they stay separated by a clear 1cm distance and never merge
         boyCharacter.style.left = boyPosition + "%";
         const containerWidth = document.querySelector('.game-world').offsetWidth || 320;
         const boyPixel = (boyPosition / 100) * containerWidth;
         const girlPixel = boyPixel - 110; // 110px separation gap on mobile
         girlCharacter.style.left = (girlPixel / containerWidth) * 100 + "%";
     } else {
-        // Desktop version untouched
         girlPosition = boyPosition - 8;
         boyCharacter.style.left = boyPosition + "%";
         girlCharacter.style.left = girlPosition + "%";
+    }
+
+    // Move the speech bubble container to align with the girl character's position
+    const girlSpeechElement = document.getElementById("girlSpeech");
+    if (girlSpeechElement) {
+        girlSpeechElement.style.position = "absolute";
+        girlSpeechElement.style.left = "50%";
+        girlSpeechElement.style.transform = "translateX(-50%)";
     }
 }
 
