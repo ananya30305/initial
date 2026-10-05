@@ -444,7 +444,7 @@ body {
         min-height: 0;
     }
 
-    /* PROPERLY SCALED MOBILE CHARACTERS WITH CLEAR SEPARATION */
+   /* PROPERLY SCALED MOBILE CHARACTERS WITH CLEAR SEPARATION */
     .character {
         width: 60px;
         height: 120px;
@@ -453,7 +453,7 @@ body {
 
     .character img {
         width: 60px;
-        height: 117px; /* Uniform height, smaller width so they never overlap */
+        height: 115px; /* Uniform height, smaller width so they never overlap */
         object-fit: contain;
         object-position: bottom center;
     }
