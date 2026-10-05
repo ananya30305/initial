@@ -136,6 +136,20 @@ function getCharacterAssets(roomType) {
     }
 }
 
+
+/* =========================================================
+   SET CHARACTER POSITIONS (RESPONSIVE SEPARATION)
+========================================================= */
+
+function updateCharacterPositions() {
+    // If it's a mobile screen, use a clean 8% gap so they don't look glued; keep desktop at 8%
+    const isMobile = window.innerWidth <= 768;
+    const spacingGap = isMobile ? 8: 8;
+
+    girlPosition = boyPosition - spacingGap;
+    boyCharacter.style.left = boyPosition + "%";
+    girlCharacter.style.left = girlPosition + "%";
+}
 /* =========================================================
    SET STANDING POSITION
 ========================================================= */
