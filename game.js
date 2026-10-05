@@ -136,18 +136,115 @@ function getCharacterAssets(roomType) {
     }
 }
 /* =========================================================
-   SET CHARACTER POSITIONS (WIDE GAP ON MOBILE)
+   SET CHARACTER POSITIONS (WIDE SEPARATION ON MOBILE)
 ========================================================= */
 
 function updateCharacterPositions() {
-    // 30% gap on mobile so they are far apart and never merged; 8% on desktop
     const isMobile = window.innerWidth <= 768;
-    const spacingGap = isMobile ? 30 : 8;
+    // Wide percentage gap on mobile so individual characters never overlap or merge
+    const spacingGap = isMobile ? 38 : 8;
 
     girlPosition = boyPosition - spacingGap;
     boyCharacter.style.left = boyPosition + "%";
     girlCharacter.style.left = girlPosition + "%";
 }
+
+
+/* =========================================================
+   HUG BUTTON LOGIC (CENTERS ON MOBILE, LARGE SIZE MATCH)
+========================================================= */
+
+hugAction.addEventListener("click", () => {
+    const currentRoomKey = roomOrder[currentRoomIndex];
+    isSpecialStateActive = true;
+    girlCharacter.style.display = "none"; 
+
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Center the combined pose container right in the middle of the mobile screen
+        boyCharacter.style.left = "50%";
+        boyCharacter.style.transform = "translateX(-50%)";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "210px";
+    } else {
+        boyCharacter.style.transform = "none";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "250px";
+    }
+
+    let hugImage = "";
+    if (currentRoomKey === "hall" || currentRoomKey === "kitchen") {
+        hugImage = "game-assets/characters/both/hallkitchen-hug.png";
+    } else if (currentRoomKey === "bedroom") {
+        hugImage = "game-assets/characters/both/bed-hug.png";
+    } else if (currentRoomKey === "bathroom") {
+        hugImage = "game-assets/characters/both/bath-hug.png";
+    } else if (currentRoomKey === "pooja") {
+        hugImage = "game-assets/characters/both/pooja-hug.png";
+    }
+
+    boyImage.src = hugImage;
+    actionMessage.textContent = "I love you 💕";
+    actionMessage.classList.remove("hidden");
+
+    clearTimeout(window.actionTimer);
+    window.actionTimer = setTimeout(() => {
+        actionMessage.classList.add("hidden");
+    }, 2500);
+});
+
+
+/* =========================================================
+   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - CENTERS ON MOBILE)
+========================================================= */
+
+specialAction.addEventListener("click", () => {
+    const currentRoomKey = roomOrder[currentRoomIndex];
+    isSpecialStateActive = true;
+    girlCharacter.style.display = "none"; 
+
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Center the combined pose container right in the middle of the mobile screen
+        boyCharacter.style.left = "50%";
+        boyCharacter.style.transform = "translateX(-50%)";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "210px";
+    } else {
+        boyCharacter.style.transform = "none";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "250px";
+    }
+
+    let specialImage = "";
+    let msg = "";
+
+    if (currentRoomKey === "bedroom") {
+        specialImage = "game-assets/characters/both/pillow-attack.png";
+        msg = "Pillow fight attack! Take this! 🛏️💥";
+    } else if (currentRoomKey === "bathroom") {
+        specialImage = "game-assets/characters/both/us-bath.png";
+        msg = "Fresh & cozy together in bath 🫧";
+    } else if (currentRoomKey === "pooja") {
+        specialImage = "game-assets/characters/both/us-pooja.png";
+        msg = "God keep us happy, healthy and united always 🙏✨";
+    }
+
+    boyImage.src = specialImage;
+    actionMessage.textContent = msg;
+    actionMessage.classList.remove("hidden");
+
+    clearTimeout(window.actionTimer);
+    window.actionTimer = setTimeout(() => {
+        actionMessage.classList.add("hidden");
+    }, 2500);
+});
 /* =========================================================
    SET STANDING POSITION
 ========================================================= */

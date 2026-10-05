@@ -442,22 +442,22 @@ body {
         min-height: 0;
     }
 
-    /* LARGE, PROMINENT MOBILE CHARACTERS MATCHING ACTION POSE SCALE */
+    /* LARGE MOBILE CHARACTERS MATCHING ACTION POSE SCALE */
     .character {
-        width: 125px;
-        height: 195px;
+        width: 140px;
+        height: 200px;
         bottom: 5px;
     }
 
     .character img {
-        width: 125px;
-        height: 185px;
+        width: 140px;
+        height: 190px;
         object-fit: contain;
         object-position: bottom center;
     }
 
     .speech-bubble {
-        bottom: 180px;
+        bottom: 185px;
         font-size: 8px;
         padding: 2px 5px;
     }
