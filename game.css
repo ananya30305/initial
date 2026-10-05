@@ -409,7 +409,6 @@ body {
 /* =========================================================
    MOBILE RESPONSIVE OVERRIDES (STRICTLY FOR PHONES)
 ========================================================= */
-
 @media (max-width: 768px) {
     body {
         overflow: hidden;
@@ -438,28 +437,27 @@ body {
         font-size: 10px;
     }
 
-    /* Game world height adjusted so bottom control bar fits fully on screen */
     .game-world {
         height: calc(100vh - 44px - 105px);
         min-height: 0;
     }
-@media (max-width: 768px) {
-    /* Make single standing characters match the large size of the hug/play action poses */
+
+    /* LARGE, PROMINENT MOBILE CHARACTERS MATCHING ACTION POSE SCALE */
     .character {
-        width: 140px;
-        height: 200px;
+        width: 125px;
+        height: 195px;
         bottom: 5px;
     }
 
     .character img {
-        width: 140px;
-        height: 180px;
+        width: 125px;
+        height: 185px;
         object-fit: contain;
         object-position: bottom center;
     }
-}
+
     .speech-bubble {
-        bottom: 120px;
+        bottom: 180px;
         font-size: 8px;
         padding: 2px 5px;
     }
@@ -470,7 +468,6 @@ body {
         padding: 5px 8px;
     }
 
-    /* Compact control panel height ensuring move buttons are fully visible */
     .controls {
         height: 105px;
     }
