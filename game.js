@@ -142,9 +142,9 @@ function getCharacterAssets(roomType) {
 ========================================================= */
 
 function updateCharacterPositions() {
-    // If it's a mobile screen, use a clean 14% gap so they don't look glued; keep desktop at 8%
+    // If it's a mobile screen, use a clean 10% gap so they don't look glued; keep desktop at 8%
     const isMobile = window.innerWidth <= 768;
-    const spacingGap = isMobile ? 14 : 8;
+    const spacingGap = isMobile ? 10 : 8;
 
     girlPosition = boyPosition - spacingGap;
     boyCharacter.style.left = boyPosition + "%";

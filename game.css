@@ -447,13 +447,13 @@ body {
     /* PROPERLY SPACED, UN-GLUED MOBILE CHARACTERS */
     .character {
         width: 95px;
-        height: 135px;
+        height: 145px;
         bottom: 5px;
     }
 
     .character img {
         width: 95px;
-        height: 125px; /* Uniform exact height for both characters */
+        height: 145px; /* Uniform exact height for both characters */
         object-fit: contain;
         object-position: bottom center;
     }
