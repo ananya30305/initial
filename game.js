@@ -135,116 +135,31 @@ function getCharacterAssets(roomType) {
         };
     }
 }
+
+
 /* =========================================================
-   SET CHARACTER POSITIONS (WIDE SEPARATION ON MOBILE)
+   SET CHARACTER POSITIONS (FIXED PIXEL SEPARATION ON MOBILE)
 ========================================================= */
 
 function updateCharacterPositions() {
     const isMobile = window.innerWidth <= 768;
-    // Wide percentage gap on mobile so individual characters never overlap or merge
-    const spacingGap = isMobile ? 38 : 8;
 
-    girlPosition = boyPosition - spacingGap;
-    boyCharacter.style.left = boyPosition + "%";
-    girlCharacter.style.left = girlPosition + "%";
+    if (isMobile) {
+        // On mobile, use a fixed pixel offset so they stay separated by a clear 1cm distance and never merge
+        boyCharacter.style.left = boyPosition + "%";
+        const containerWidth = document.querySelector('.game-world').offsetWidth || 320;
+        const boyPixel = (boyPosition / 100) * containerWidth;
+        const girlPixel = boyPixel - 110; // 110px separation gap on mobile
+        girlCharacter.style.left = (girlPixel / containerWidth) * 100 + "%";
+    } else {
+        // Desktop version untouched
+        girlPosition = boyPosition - 8;
+        boyCharacter.style.left = boyPosition + "%";
+        girlCharacter.style.left = girlPosition + "%";
+    }
 }
 
 
-/* =========================================================
-   HUG BUTTON LOGIC (CENTERS ON MOBILE, LARGE SIZE MATCH)
-========================================================= */
-
-hugAction.addEventListener("click", () => {
-    const currentRoomKey = roomOrder[currentRoomIndex];
-    isSpecialStateActive = true;
-    girlCharacter.style.display = "none"; 
-
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        // Center the combined pose container right in the middle of the mobile screen
-        boyCharacter.style.left = "50%";
-        boyCharacter.style.transform = "translateX(-50%)";
-        boyCharacter.style.width = "220px";
-        boyImage.style.width = "220px";
-        boyImage.style.height = "210px";
-    } else {
-        boyCharacter.style.transform = "none";
-        boyCharacter.style.width = "220px";
-        boyImage.style.width = "220px";
-        boyImage.style.height = "250px";
-    }
-
-    let hugImage = "";
-    if (currentRoomKey === "hall" || currentRoomKey === "kitchen") {
-        hugImage = "game-assets/characters/both/hallkitchen-hug.png";
-    } else if (currentRoomKey === "bedroom") {
-        hugImage = "game-assets/characters/both/bed-hug.png";
-    } else if (currentRoomKey === "bathroom") {
-        hugImage = "game-assets/characters/both/bath-hug.png";
-    } else if (currentRoomKey === "pooja") {
-        hugImage = "game-assets/characters/both/pooja-hug.png";
-    }
-
-    boyImage.src = hugImage;
-    actionMessage.textContent = "I love you 💕";
-    actionMessage.classList.remove("hidden");
-
-    clearTimeout(window.actionTimer);
-    window.actionTimer = setTimeout(() => {
-        actionMessage.classList.add("hidden");
-    }, 2500);
-});
-
-
-/* =========================================================
-   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - CENTERS ON MOBILE)
-========================================================= */
-
-specialAction.addEventListener("click", () => {
-    const currentRoomKey = roomOrder[currentRoomIndex];
-    isSpecialStateActive = true;
-    girlCharacter.style.display = "none"; 
-
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        // Center the combined pose container right in the middle of the mobile screen
-        boyCharacter.style.left = "50%";
-        boyCharacter.style.transform = "translateX(-50%)";
-        boyCharacter.style.width = "220px";
-        boyImage.style.width = "220px";
-        boyImage.style.height = "210px";
-    } else {
-        boyCharacter.style.transform = "none";
-        boyCharacter.style.width = "220px";
-        boyImage.style.width = "220px";
-        boyImage.style.height = "250px";
-    }
-
-    let specialImage = "";
-    let msg = "";
-
-    if (currentRoomKey === "bedroom") {
-        specialImage = "game-assets/characters/both/pillow-attack.png";
-        msg = "Pillow fight attack! Take this! 🛏️💥";
-    } else if (currentRoomKey === "bathroom") {
-        specialImage = "game-assets/characters/both/us-bath.png";
-        msg = "Fresh & cozy together in bath 🫧";
-    } else if (currentRoomKey === "pooja") {
-        specialImage = "game-assets/characters/both/us-pooja.png";
-        msg = "God keep us happy, healthy and united always 🙏✨";
-    }
-
-    boyImage.src = specialImage;
-    actionMessage.textContent = msg;
-    actionMessage.classList.remove("hidden");
-
-    clearTimeout(window.actionTimer);
-    window.actionTimer = setTimeout(() => {
-        actionMessage.classList.add("hidden");
-    }, 2500);
-});
 /* =========================================================
    SET STANDING POSITION
 ========================================================= */
@@ -253,7 +168,8 @@ function setStandingPosition() {
     if (isSpecialStateActive) return;
 
     girlCharacter.style.display = "flex";
-    boyCharacter.style.width = ""; // Reset width back to default
+    boyCharacter.style.width = ""; 
+    boyCharacter.style.transform = "none";
     boyImage.style.width = "";
     boyImage.style.height = "";
 
@@ -280,6 +196,7 @@ function moveCharacters(direction) {
         isSpecialStateActive = false;
         girlCharacter.style.display = "flex";
         boyCharacter.style.width = "";
+        boyCharacter.style.transform = "none";
         boyImage.style.width = "";
         boyImage.style.height = "";
     }
@@ -289,7 +206,7 @@ function moveCharacters(direction) {
         girlImage.src = assets.left.girl;
         boyPosition -= step;
 
-        if (boyPosition <= 12) {
+        if (boyPosition <= 15) {
             changeRoomAtEdge("left");
             return;
         }
@@ -300,7 +217,7 @@ function moveCharacters(direction) {
         girlImage.src = assets.right.girl;
         boyPosition += step;
 
-        if (boyPosition >= 88) {
+        if (boyPosition >= 85) {
             changeRoomAtEdge("right");
             return;
         }
@@ -324,19 +241,19 @@ function changeRoomAtEdge(direction) {
         currentRoomIndex++;
         if (currentRoomIndex >= roomOrder.length) {
             currentRoomIndex = roomOrder.length - 1;
-            boyPosition = 85;
+            boyPosition = 80;
             updateCharacterPositions();
             setStandingPosition();
             return;
         }
-        boyPosition = 20;
+        boyPosition = 25;
     }
 
     if (direction === "left") {
         currentRoomIndex--;
         if (currentRoomIndex < 0) {
             currentRoomIndex = 0;
-            boyPosition = 15;
+            boyPosition = 20;
             updateCharacterPositions();
             setStandingPosition();
             return;
@@ -364,6 +281,7 @@ function switchRoom(roomKey) {
     isSpecialStateActive = false;
     girlCharacter.style.display = "flex";
     boyCharacter.style.width = "";
+    boyCharacter.style.transform = "none";
     boyImage.style.width = "";
     boyImage.style.height = "";
 
@@ -443,7 +361,7 @@ cuteAction.addEventListener("click", () => {
 
 
 /* =========================================================
-   HUG BUTTON LOGIC (LARGER SIZE)
+   HUG BUTTON LOGIC (CENTERS ON MOBILE & MATCHES ACTION SIZE)
 ========================================================= */
 
 hugAction.addEventListener("click", () => {
@@ -451,10 +369,21 @@ hugAction.addEventListener("click", () => {
     isSpecialStateActive = true;
     girlCharacter.style.display = "none"; 
 
-    // Make the display container and image larger for special coupled poses
-    boyCharacter.style.width = "220px";
-    boyImage.style.width = "220px";
-    boyImage.style.height = "250px";
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Center perfectly in the middle of mobile screen and match action image size
+        boyCharacter.style.left = "50%";
+        boyCharacter.style.transform = "translateX(-50%)";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "210px";
+    } else {
+        boyCharacter.style.transform = "none";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "250px";
+    }
 
     let hugImage = "";
     if (currentRoomKey === "hall" || currentRoomKey === "kitchen") {
@@ -479,7 +408,7 @@ hugAction.addEventListener("click", () => {
 
 
 /* =========================================================
-   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - LARGER SIZE)
+   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - CENTERS ON MOBILE)
 ========================================================= */
 
 specialAction.addEventListener("click", () => {
@@ -487,10 +416,21 @@ specialAction.addEventListener("click", () => {
     isSpecialStateActive = true;
     girlCharacter.style.display = "none"; 
 
-    // Make the display container and image larger for special coupled poses
-    boyCharacter.style.width = "220px";
-    boyImage.style.width = "220px";
-    boyImage.style.height = "250px";
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        // Center perfectly in the middle of mobile screen and match action image size
+        boyCharacter.style.left = "50%";
+        boyCharacter.style.transform = "translateX(-50%)";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "210px";
+    } else {
+        boyCharacter.style.transform = "none";
+        boyCharacter.style.width = "220px";
+        boyImage.style.width = "220px";
+        boyImage.style.height = "250px";
+    }
 
     let specialImage = "";
     let msg = "";
