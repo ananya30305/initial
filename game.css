@@ -444,16 +444,15 @@ body {
         min-height: 0;
     }
 
-    /* UNIFORM & UN-GLUED MOBILE CHARACTERS: 
-       Given distinct width so they don't merge, but identical uniform height. */
+    /* PROPERLY SPACED, UN-GLUED MOBILE CHARACTERS */
     .character {
-        width: 72px;
+        width: 95px;
         height: 135px;
         bottom: 5px;
     }
 
     .character img {
-        width: 110px; /* Wider image container so individual sprites are fully visible and distinct */
+        width: 95px;
         height: 125px; /* Uniform exact height for both characters */
         object-fit: contain;
         object-position: bottom center;
