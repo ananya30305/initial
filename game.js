@@ -137,17 +137,27 @@ function getCharacterAssets(roomType) {
 }
 
 /* =========================================================
-   SET CHARACTER POSITIONS (WIDE GAP ON MOBILE)
+   SET CHARACTER POSITIONS (PIXEL SEPARATION ON MOBILE)
 ========================================================= */
 
 function updateCharacterPositions() {
-    // 32% gap on mobile so they are far apart; 8% on desktop
     const isMobile = window.innerWidth <= 768;
-    const spacingGap = isMobile ? 32 : 8;
 
-    girlPosition = boyPosition - spacingGap;
-    boyCharacter.style.left = boyPosition + "%";
-    girlCharacter.style.left = girlPosition + "%";
+    if (isMobile) {
+        // On mobile, use pixel values to maintain a fixed 1 cm physical gap between them
+        const containerWidth = document.querySelector('.game-world').offsetWidth || 320;
+        // Convert desired gap into percentage equivalent so they stay separated and don't merge
+        boyCharacter.style.left = boyPosition + "%";
+        // Place girl character distinctly to the left/right with a safe fixed pixel offset
+        const boyPixelPos = (boyPosition / 100) * containerWidth;
+        const girlPixelPos = boyPixelPos - 95; // 95px gap ensures they never stick or merge
+        girlCharacter.style.left = (girlPixelPos / containerWidth) * 100 + "%";
+    } else {
+        // Standard desktop spacing untouched
+        girlPosition = boyPosition - 8;
+        boyCharacter.style.left = boyPosition + "%";
+        girlCharacter.style.left = girlPosition + "%";
+    }
 }
 /* =========================================================
    SET STANDING POSITION

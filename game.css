@@ -443,19 +443,21 @@ body {
         height: calc(100vh - 44px - 105px);
         min-height: 0;
     }
-/* PROPERLY SCALED MOBILE CHARACTERS WITH CLEAR SEPARATION */
+@media (max-width: 768px) {
+    /* Make single standing characters match the large size of the hug/play action poses */
     .character {
-        width: 60px;
-        height: 120px;
+        width: 140px;
+        height: 200px;
         bottom: 5px;
     }
 
     .character img {
-        width: 60px;
-        height: 110px; /* Uniform height, smaller width so they never overlap */
+        width: 140px;
+        height: 180px;
         object-fit: contain;
         object-position: bottom center;
     }
+}
     .speech-bubble {
         bottom: 120px;
         font-size: 8px;
