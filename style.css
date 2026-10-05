@@ -764,12 +764,19 @@ body {
     font-size: 0.75rem;
   }
 
-  /* Optimized compact calendar for mobile screens */
+  /* --- FIXED MOBILE CALENDAR POSITIONING & SIZING --- */
+  .calendar-trigger-wrapper {
+    position: static; /* Allows the calendar to align neatly within the card bounds */
+  }
+
   .calendar-dropdown {
-    right: 50%;
-    transform: translateX(50%);
-    width: 250px;
-    padding: 12px;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    padding: 14px;
   }
 
   .cal-title {
@@ -777,7 +784,7 @@ body {
   }
 
   .cal-day-cell {
-    padding: 5px 0;
-    font-size: 0.78rem;
+    padding: 6px 0;
+    font-size: 0.8rem;
   }
 }
