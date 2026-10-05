@@ -154,8 +154,8 @@ body {
 .character {
     position: absolute;
     bottom: 15px;
-    width: 190px;
-    height: 250px;
+    width: 170px;
+    height: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,8 +165,8 @@ body {
 }
 
 .character img {
-    width: 190px;
-    height: 235px;
+    width: 170px;
+    height: 210px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
@@ -187,7 +187,7 @@ body {
 
 .speech-bubble {
     position: absolute;
-    bottom: 225px;
+    bottom: 200px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
@@ -442,7 +442,7 @@ body {
 }
 
 /* =========================================================
-   MOBILE RESPONSIVE OVERRIDES (TARGETED ONLY FOR PHONES <= 768px)
+   MOBILE RESPONSIVE OVERRIDES (TARGETED STRICTLY FOR PHONES)
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -451,65 +451,65 @@ body {
     }
 
     .top-bar {
-        height: 48px;
-        padding: 0 8px;
+        height: 50px;
+        padding: 0 10px;
     }
 
     .back-button {
-        padding: 4px 8px;
+        padding: 5px 10px;
         font-size: 11px;
     }
 
     .home-title span {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .home-title small {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .room-name {
-        min-width: 50px;
+        min-width: 55px;
         font-size: 11px;
     }
 
-    /* Shrink game world height so controls fit fully on screen */
+    /* Adjust game world height so controls fit completely on screen */
     .game-world {
-        height: calc(100vh - 48px - 160px);
+        height: calc(100vh - 50px - 130px);
         min-height: 0;
     }
 
-    /* Properly sized, clean characters for mobile without overlapping */
+    /* Perfectly proportioned mobile character sizing to prevent merging */
     .character {
-        width: 100px;
-        height: 140px;
+        width: 105px;
+        height: 145px;
         bottom: 8px;
     }
 
     .character img {
-        width: 100px;
-        height: 130px;
+        width: 105px;
+        height: 135px;
     }
 
     .speech-bubble {
-        bottom: 130px;
+        bottom: 135px;
         font-size: 9px;
         padding: 3px 6px;
     }
 
     .action-message {
-        bottom: 30%;
+        bottom: 28%;
         font-size: 10px;
         padding: 6px 10px;
     }
 
-    /* Compact control panel height so all action buttons & arrows fit perfectly */
+    /* Fixed compact control panel height so move buttons are fully visible */
     .controls {
-        height: 160px;
+        height: 130px;
     }
 
     .controls-inner {
-        padding: 6px 8px;
+        padding: 6px 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -522,7 +522,7 @@ body {
     }
 
     .section-title {
-        display: none; /* Hide section title on mobile to save vertical space */
+        display: none;
     }
 
     .room-buttons {
@@ -536,19 +536,19 @@ body {
         border-radius: 14px;
     }
 
-    /* Bottom row containing action buttons + move arrows side by side */
+    /* Combined bottom row keeping actions and movement arrows side-by-side */
     .bottom-action-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 4px;
+        gap: 6px;
         width: 100%;
     }
 
     .action-section {
         display: flex;
         align-items: center;
-        gap: 3px;
+        gap: 4px;
         overflow-x: auto;
         flex: 1;
         min-width: 0;
@@ -563,13 +563,13 @@ body {
     .cute-action {
         padding: 5px 8px;
         font-size: 9px;
-        min-height: 32px;
-        border-radius: 14px;
+        min-height: 30px;
+        border-radius: 12px;
         flex-shrink: 0;
     }
 
     .movement {
-        gap: 3px;
+        gap: 4px;
         flex-shrink: 0;
     }
 
@@ -578,8 +578,8 @@ body {
     }
 
     .move-button {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
         font-size: 14px;
     }
 }
