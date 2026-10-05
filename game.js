@@ -65,6 +65,25 @@ const cuteAction = document.getElementById("cuteAction");
 const moveLeft = document.getElementById("moveLeft");
 const moveRight = document.getElementById("moveRight");
 const roomButtons = document.querySelectorAll(".room-button");
+const actionSection = document.querySelector(".action-section");
+
+
+/* =========================================================
+   CREATE HUG & SPECIAL ACTION BUTTONS DYNAMICALLY
+========================================================= */
+
+const hugAction = document.createElement("button");
+hugAction.className = "cute-action";
+hugAction.id = "hugAction";
+hugAction.innerHTML = "🤗 Hug";
+hugAction.style.marginLeft = "8px";
+actionSection.appendChild(hugAction);
+
+const specialAction = document.createElement("button");
+specialAction.className = "cute-action hidden";
+specialAction.id = "specialAction";
+specialAction.style.marginLeft = "8px";
+actionSection.appendChild(specialAction);
 
 
 /* =========================================================
@@ -74,7 +93,7 @@ const roomButtons = document.querySelectorAll(".room-button");
 let boyPosition = 58;
 let girlPosition = 50; 
 let currentRoomIndex = 0;
-let roomInteractionStep = 0; // Tracks cycle for cute action per room type
+let isSpecialStateActive = false;
 
 const roomOrder = [
     "hall",
@@ -109,7 +128,6 @@ function getCharacterAssets(roomType) {
             right: { boy: "game-assets/characters/boy/boy-pooja-right.png", girl: "game-assets/characters/girl/girl-pooja-right.png" }
         };
     } else {
-        // Default (Hall / Kitchen)
         return {
             front: { boy: "game-assets/characters/boy/boy-front.png", girl: "game-assets/characters/girl/girl-front.png" },
             left: { boy: "game-assets/characters/boy/boy-walk-left.png", girl: "game-assets/characters/girl/girl-walk-left.png" },
@@ -135,6 +153,13 @@ function updateCharacterPositions() {
 ========================================================= */
 
 function setStandingPosition() {
+    if (isSpecialStateActive) return;
+
+    girlCharacter.style.display = "flex";
+    boyCharacter.style.width = ""; // Reset width back to default
+    boyImage.style.width = "";
+    boyImage.style.height = "";
+
     const currentRoomKey = roomOrder[currentRoomIndex];
     const room = rooms[currentRoomKey];
     const assets = getCharacterAssets(room.type);
@@ -153,6 +178,14 @@ function moveCharacters(direction) {
     const currentRoomKey = roomOrder[currentRoomIndex];
     const room = rooms[currentRoomKey];
     const assets = getCharacterAssets(room.type);
+
+    if (isSpecialStateActive) {
+        isSpecialStateActive = false;
+        girlCharacter.style.display = "flex";
+        boyCharacter.style.width = "";
+        boyImage.style.width = "";
+        boyImage.style.height = "";
+    }
 
     if (direction === "left") {
         boyImage.src = assets.left.boy;
@@ -231,7 +264,11 @@ function switchRoom(roomKey) {
     roomName.textContent = room.name;
     loveMessage.textContent = room.message;
     girlSpeech.textContent = room.speech;
-    roomInteractionStep = 0; // Reset interaction step on room switch
+    isSpecialStateActive = false;
+    girlCharacter.style.display = "flex";
+    boyCharacter.style.width = "";
+    boyImage.style.width = "";
+    boyImage.style.height = "";
 
     roomButtons.forEach(button => {
         button.classList.toggle(
@@ -242,8 +279,15 @@ function switchRoom(roomKey) {
 
     if (roomKey === "pooja") {
         poojaInfo.classList.remove("hidden");
+        specialAction.textContent = "🙏 Pray";
+        specialAction.classList.remove("hidden");
+    } else if (roomKey === "bedroom" || roomKey === "bathroom") {
+        poojaInfo.classList.add("hidden");
+        specialAction.textContent = "▶️ Play";
+        specialAction.classList.remove("hidden");
     } else {
         poojaInfo.classList.add("hidden");
+        specialAction.classList.add("hidden");
     }
 
     updateCharacterPositions();
@@ -279,43 +323,94 @@ moveRight.addEventListener("click", () => {
 
 
 /* =========================================================
-   CUTE ACTION / ROOM-SPECIFIC INTERACTIVE STATES
+   CUTE ACTION BUTTON
 ========================================================= */
 
 cuteAction.addEventListener("click", () => {
-    const currentRoomKey = roomOrder[currentRoomIndex];
-    const room = rooms[currentRoomKey];
+    const cuteMessages = [
+        "Hehe, come closer ❤️",
+        "You are my favorite person 🥰",
+        "Let's stay together forever ♡",
+        "You're so cute! 💕",
+        "I love our little home 🏡❤️"
+    ];
+    const randomIndex = Math.floor(Math.random() * cuteMessages.length);
+    actionMessage.textContent = cuteMessages[randomIndex];
+    actionMessage.classList.remove("hidden");
 
-    if (room.type === "bed") {
-        roomInteractionStep++;
-        if (roomInteractionStep === 1) {
-            // Step 1: Pillow attack action
-            actionMessage.textContent = "Pillow fight attack! Take this! 🛏️💥";
-        } else if (roomInteractionStep === 2) {
-            // Step 2: Us-bed state appears
-            boyImage.src = "game-assets/characters/both/us-bed.png"; // Adjust path if located in both folder
-            girlImage.src = "game-assets/characters/both/us-bed.png";
-            actionMessage.textContent = "Cozy together in bed ♡";
-        } else {
-            // Step 3: Hug state (bed-hug)
-            boyImage.src = "game-assets/characters/both/bed-hug.png";
-            girlImage.src = "game-assets/characters/both/bed-hug.png";
-            actionMessage.textContent = "Warm cozy hug in bed 🤗💕";
-            roomInteractionStep = 0; // Reset cycle
-        }
-    } else {
-        // Default cute messages for Hall/Kitchen/etc.
-        const cuteMessages = [
-            "Hehe, come closer ❤️",
-            "You are my favorite person 🥰",
-            "Let's stay together forever ♡",
-            "Give me a hug 🤗",
-            "You're so cute! 💕"
-        ];
-        const randomIndex = Math.floor(Math.random() * cuteMessages.length);
-        actionMessage.textContent = cuteMessages[randomIndex];
+    clearTimeout(window.actionTimer);
+    window.actionTimer = setTimeout(() => {
+        actionMessage.classList.add("hidden");
+    }, 2500);
+});
+
+
+/* =========================================================
+   HUG BUTTON LOGIC (LARGER SIZE)
+========================================================= */
+
+hugAction.addEventListener("click", () => {
+    const currentRoomKey = roomOrder[currentRoomIndex];
+    isSpecialStateActive = true;
+    girlCharacter.style.display = "none"; 
+
+    // Make the display container and image larger for special coupled poses
+    boyCharacter.style.width = "220px";
+    boyImage.style.width = "220px";
+    boyImage.style.height = "250px";
+
+    let hugImage = "";
+    if (currentRoomKey === "hall" || currentRoomKey === "kitchen") {
+        hugImage = "game-assets/characters/both/hallkitchen-hug.png";
+    } else if (currentRoomKey === "bedroom") {
+        hugImage = "game-assets/characters/both/bed-hug.png";
+    } else if (currentRoomKey === "bathroom") {
+        hugImage = "game-assets/characters/both/bath-hug.png";
+    } else if (currentRoomKey === "pooja") {
+        hugImage = "game-assets/characters/both/pooja-hug.png";
     }
 
+    boyImage.src = hugImage;
+    actionMessage.textContent = "I love you 💕";
+    actionMessage.classList.remove("hidden");
+
+    clearTimeout(window.actionTimer);
+    window.actionTimer = setTimeout(() => {
+        actionMessage.classList.add("hidden");
+    }, 2500);
+});
+
+
+/* =========================================================
+   SPECIAL ACTION BUTTON LOGIC (PLAY / PRAY - LARGER SIZE)
+========================================================= */
+
+specialAction.addEventListener("click", () => {
+    const currentRoomKey = roomOrder[currentRoomIndex];
+    isSpecialStateActive = true;
+    girlCharacter.style.display = "none"; 
+
+    // Make the display container and image larger for special coupled poses
+    boyCharacter.style.width = "220px";
+    boyImage.style.width = "220px";
+    boyImage.style.height = "250px";
+
+    let specialImage = "";
+    let msg = "";
+
+    if (currentRoomKey === "bedroom") {
+        specialImage = "game-assets/characters/both/pillow-attack.png";
+        msg = "Pillow fight attack! Take this! 🛏️💥";
+    } else if (currentRoomKey === "bathroom") {
+        specialImage = "game-assets/characters/both/us-bath.png";
+        msg = "Fresh & cozy together in bath 🫧";
+    } else if (currentRoomKey === "pooja") {
+        specialImage = "game-assets/characters/both/us-pooja.png";
+        msg = "God keep us happy, healthy and united always 🙏✨";
+    }
+
+    boyImage.src = specialImage;
+    actionMessage.textContent = msg;
     actionMessage.classList.remove("hidden");
 
     clearTimeout(window.actionTimer);
