@@ -148,14 +148,14 @@ body {
 }
 
 /* =========================
-   CHARACTERS (DESKTOP DEFAULT)
+   CHARACTERS (INCREASED SIZE)
 ========================= */
 
 .character {
     position: absolute;
-    bottom: 25px;
-    width: 170px;
-    height: 230px;
+    bottom: 15px;
+    width: 190px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,8 +165,8 @@ body {
 }
 
 .character img {
-    width: 170px;
-    height: 210px;
+    width: 190px;
+    height: 235px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
@@ -187,7 +187,7 @@ body {
 
 .speech-bubble {
     position: absolute;
-    bottom: 200px;
+    bottom: 225px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
@@ -295,7 +295,7 @@ body {
 }
 
 /* =========================
-   BOTTOM CONTROLS (DESKTOP DEFAULT)
+   BOTTOM CONTROLS
 ========================= */
 
 .controls {
@@ -442,7 +442,7 @@ body {
 }
 
 /* =========================================================
-   MOBILE RESPONSIVE OVERRIDES (TARGETED ONLY FOR PHONES)
+   MOBILE RESPONSIVE OVERRIDES
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -451,13 +451,13 @@ body {
     }
 
     .top-bar {
-        height: 56px;
+        height: 52px;
         padding: 0 10px;
     }
 
     .back-button {
-        padding: 6px 10px;
-        font-size: 11px;
+        padding: 5px 10px;
+        font-size: 12px;
     }
 
     .home-title span {
@@ -469,42 +469,41 @@ body {
     }
 
     .room-name {
-        min-width: 55px;
-        font-size: 11px;
+        min-width: 60px;
+        font-size: 12px;
     }
 
     .game-world {
-        height: calc(100vh - 56px - 175px);
+        height: calc(100vh - 52px - 145px);
         min-height: 0;
     }
 
-    /* Natural, balanced character sizing and spacing for mobile view */
+    /* Larger, prominent character size on mobile view as well */
     .character {
-        width: 115px;
-        height: 160px;
-        bottom: 12px;
+        width: 155px;
+        height: 205px;
+        bottom: 10px;
     }
 
     .character img {
-        width: 115px;
-        height: 150px;
+        width: 155px;
+        height: 195px;
     }
 
     .speech-bubble {
-        bottom: 145px;
+        bottom: 195px;
         font-size: 10px;
-        padding: 5px 9px;
+        padding: 4px 8px;
     }
 
     .action-message {
-        bottom: 32%;
+        bottom: 30%;
         font-size: 11px;
-        padding: 8px 14px;
+        padding: 7px 12px;
     }
 
-    /* Perfectly formatted compact bottom control panel for mobile screens */
     .controls {
-        height: 175px;
+        height: 145px;
     }
 
     .controls-inner {
@@ -512,17 +511,11 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 6px;
     }
 
     .places-section {
         width: 100%;
         flex: unset;
-    }
-
-    .section-title {
-        font-size: 10px;
-        margin-bottom: 3px;
     }
 
     .room-buttons {
@@ -531,16 +524,23 @@ body {
     }
 
     .room-button {
-        padding: 5px 10px;
+        padding: 5px 9px;
         font-size: 10px;
         border-radius: 16px;
     }
 
-    /* Wrap and align action buttons & movement arrows cleanly inside visible screen */
+    .bottom-action-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        width: 100%;
+    }
+
     .action-section {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 4px;
         overflow-x: auto;
         flex: 1;
         min-width: 0;
@@ -561,12 +561,8 @@ body {
     }
 
     .movement {
-        gap: 4px;
+        gap: 5px;
         flex-shrink: 0;
-    }
-
-    .movement-label {
-        display: none; /* Hide vertical text label on small mobile screens to save space */
     }
 
     .move-button {
