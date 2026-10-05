@@ -187,7 +187,7 @@ function setStandingPosition() {
 
 
 /* =========================================================
-   MOVE CHARACTERS
+   MOVE CHARACTERS (STRICT WALKING ASSETS, NO FRONT GLITCH)
 ========================================================= */
 
 function moveCharacters(direction) {
@@ -206,6 +206,7 @@ function moveCharacters(direction) {
     }
 
     if (direction === "left") {
+        // Strictly use left walking assets, never front assets
         boyImage.src = assets.left.boy;
         girlImage.src = assets.left.girl;
         boyPosition -= step;
@@ -217,6 +218,7 @@ function moveCharacters(direction) {
     }
 
     if (direction === "right") {
+        // Strictly use right walking assets, never front assets
         boyImage.src = assets.right.boy;
         girlImage.src = assets.right.girl;
         boyPosition += step;
@@ -229,12 +231,12 @@ function moveCharacters(direction) {
 
     updateCharacterPositions();
 
+    // Smoothly return to standing only after movement stops
     clearTimeout(window.walkTimer);
     window.walkTimer = setTimeout(() => {
         setStandingPosition();
-    }, 250);
+    }, 300);
 }
-
 
 /* =========================================================
    ROOM CHANGE WHEN REACHING EDGE
