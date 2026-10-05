@@ -37,11 +37,11 @@ body {
 ========================= */
 
 .top-bar {
-    height: 72px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 16px;
     background: rgba(255, 248, 245, 0.97);
     border-bottom: 1px solid rgba(143, 64, 82, 0.15);
     position: relative;
@@ -55,9 +55,9 @@ body {
     color: var(--dark-pink);
     background: #fff;
     border: 1px solid #efd4da;
-    padding: 9px 16px;
+    padding: 7px 14px;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -70,23 +70,23 @@ body {
 .home-title span {
     display: block;
     font-family: "Great Vibes", cursive;
-    font-size: 30px;
+    font-size: 26px;
     color: var(--dark-pink);
     white-space: nowrap;
 }
 
 .home-title small {
     display: block;
-    font-size: 11px;
+    font-size: 10px;
     color: #a8757e;
     letter-spacing: 1px;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 .room-name {
-    min-width: 90px;
+    min-width: 75px;
     text-align: right;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--dark-pink);
     white-space: nowrap;
@@ -98,8 +98,8 @@ body {
 
 .game-world {
     position: relative;
-    height: calc(100vh - 72px - 170px);
-    min-height: 420px;
+    height: calc(100vh - 64px - 195px);
+    min-height: 350px;
     overflow: hidden;
     background: #eadbd5;
 }
@@ -132,46 +132,45 @@ body {
 
 .love-message {
     position: absolute;
-    top: 20px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255,255,255,0.90);
-    padding: 9px 18px;
+    padding: 7px 15px;
     border-radius: 30px;
     color: var(--dark-pink);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    box-shadow: 0 8px 30px rgba(80,30,40,0.12);
+    box-shadow: 0 6px 20px rgba(80,30,40,0.12);
     z-index: 20;
     white-space: nowrap;
     pointer-events: none;
 }
 
 /* =========================
-   CHARACTERS (UNIFORM & LARGER SIZE)
+   CHARACTERS (UNIFORM & SIZED)
 ========================= */
 
 .character {
     position: absolute;
-    bottom: 25px;
-    width: 170px;
-    height: 230px;
+    bottom: 15px;
+    width: 140px;
+    height: 190px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
     z-index: 10;
-    transition: left 0.15s linear;
+    transition: left 0.1s linear;
 }
 
-/* Force both character images to share exact dimensions so heights match perfectly */
 .character img {
-    width: 170px;
-    height: 210px;
+    width: 140px;
+    height: 175px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
-    filter: drop-shadow(0 12px 10px rgba(50,20,20,0.25));
+    filter: drop-shadow(0 10px 8px rgba(50,20,20,0.22));
 }
 
 .boy-character {
@@ -188,16 +187,16 @@ body {
 
 .speech-bubble {
     position: absolute;
-    bottom: 200px;
+    bottom: 165px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
     color: var(--dark-pink);
-    padding: 9px 13px;
-    border-radius: 16px;
-    font-size: 12px;
+    padding: 7px 11px;
+    border-radius: 14px;
+    font-size: 11px;
     font-weight: 600;
-    box-shadow: 0 8px 25px rgba(70,20,30,0.15);
+    box-shadow: 0 6px 20px rgba(70,20,30,0.15);
     border: 1px solid #f0cbd3;
     white-space: nowrap;
     z-index: 30;
@@ -207,11 +206,11 @@ body {
 .speech-bubble::after {
     content: "";
     position: absolute;
-    bottom: -7px;
+    bottom: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: white;
     border-right: 1px solid #f0cbd3;
     border-bottom: 1px solid #f0cbd3;
@@ -219,7 +218,7 @@ body {
 
 @keyframes floating {
     0%, 100% { margin-top: 0; }
-    50% { margin-top: -5px; }
+    50% { margin-top: -4px; }
 }
 
 /* =========================
@@ -228,39 +227,39 @@ body {
 
 .pooja-info {
     position: absolute;
-    top: 75px;
+    top: 55px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
     text-align: center;
     background: rgba(255,250,242,0.93);
-    padding: 12px 18px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(70,40,20,0.15);
+    padding: 10px 15px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(70,40,20,0.15);
 }
 
 .pooja-info > div:first-child {
-    font-size: 25px;
-    margin-bottom: 3px;
+    font-size: 22px;
+    margin-bottom: 2px;
 }
 
 .pooja-info span {
-    font-size: 12px;
+    font-size: 11px;
     color: #79504c;
     font-weight: 600;
 }
 
 .deities {
     display: flex;
-    gap: 7px;
+    gap: 6px;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .deities span {
     background: #fff;
-    padding: 4px 8px;
-    border-radius: 20px;
+    padding: 3px 7px;
+    border-radius: 18px;
     font-size: 10px;
     color: #9a5b32;
 }
@@ -272,17 +271,17 @@ body {
 .action-message {
     position: absolute;
     left: 50%;
-    bottom: 35%;
+    bottom: 32%;
     transform: translateX(-50%);
     z-index: 30;
-    background: rgba(255,255,255,0.94);
-    padding: 13px 20px;
-    border-radius: 25px;
+    background: rgba(255,255,255,0.95);
+    padding: 11px 16px;
+    border-radius: 22px;
     color: var(--dark-pink);
     font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 10px 35px rgba(60,20,30,0.15);
-    animation: pop 0.35s ease;
+    font-size: 13px;
+    box-shadow: 0 8px 30px rgba(60,20,30,0.15);
+    animation: pop 0.3s ease;
     white-space: nowrap;
 }
 
@@ -296,16 +295,17 @@ body {
 }
 
 /* =========================
-   BOTTOM CONTROLS
+   BOTTOM CONTROLS (FULLY MOBILE-GRID OPTIMIZED)
 ========================= */
 
 .controls {
-    height: 170px;
-    background: rgba(255,248,245,0.98);
+    height: 195px;
+    background: rgba(255,248,245,0.99);
     border-top: 1px solid rgba(143,64,82,0.12);
     position: relative;
     z-index: 50;
     flex-shrink: 0;
+    overflow: hidden;
 }
 
 .controls-inner {
@@ -313,10 +313,11 @@ body {
     height: 100%;
     max-width: 1100px;
     margin: auto;
-    padding: 18px 24px;
+    padding: 12px 14px;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 /* =========================
@@ -324,24 +325,25 @@ body {
 ========================= */
 
 .places-section {
-    flex: 1;
+    width: 100%;
     min-width: 0;
 }
 
 .section-title {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     color: #95616b;
-    margin-bottom: 9px;
+    margin-bottom: 5px;
 }
 
 .room-buttons {
     display: flex;
-    gap: 7px;
+    gap: 6px;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .room-buttons::-webkit-scrollbar {
@@ -353,10 +355,10 @@ body {
     border: 1px solid #efd2d8;
     background: white;
     color: #794550;
-    padding: 9px 12px;
-    border-radius: 25px;
+    padding: 7px 11px;
+    border-radius: 20px;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
@@ -370,27 +372,47 @@ body {
 }
 
 /* =========================
-   CUTE ACTION
+   ACTIONS & MOVEMENT GRID BAR
 ========================= */
 
-.action-section {
-    flex-shrink: 0;
+.bottom-action-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+}
+
+.action-section {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
 }
 
 .cute-action {
     border: none;
     background: var(--soft-pink);
     color: var(--dark-pink);
-    padding: 12px 16px;
-    border-radius: 30px;
+    padding: 9px 12px;
+    border-radius: 22px;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
-    min-height: 45px;
+    min-height: 38px;
+    box-shadow: 0 3px 10px rgba(143,64,82,0.08);
+}
+
+#hugAction {
+    background: #fde2e4;
+}
+
+#specialAction {
+    background: #fce4ec;
 }
 
 /* =========================
@@ -400,24 +422,24 @@ body {
 .movement {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
     flex-shrink: 0;
 }
 
 .move-button {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     border: none;
     border-radius: 50%;
     background: var(--dark-pink);
     color: white;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(100,30,50,0.18);
+    box-shadow: 0 4px 12px rgba(100,30,50,0.2);
     touch-action: manipulation;
 }
 
@@ -426,7 +448,7 @@ body {
 }
 
 .movement-label {
-    font-size: 9px;
+    font-size: 8px;
     color: #9b737a;
     font-weight: 700;
     writing-mode: vertical-rl;
@@ -434,185 +456,10 @@ body {
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE MEDIA QUERIES FOR SMALLER PHONES
 ========================================================= */
 
-@media (max-width: 700px) {
-    body {
-        overflow: hidden;
-    }
-
-    .top-bar {
-        height: 60px;
-        padding: 0 12px;
-    }
-
-    .back-button {
-        padding: 7px 11px;
-        font-size: 11px;
-    }
-
-    .back-button span {
-        display: none;
-    }
-
-    .home-title span {
-        font-size: 24px;
-    }
-
-    .home-title small {
-        font-size: 8px;
-    }
-
-    .room-name {
-        min-width: 65px;
-        font-size: 11px;
-    }
-
-    .game-world {
-        height: calc(100vh - 60px - 205px);
-        min-height: 0;
-    }
-
-    .room-background {
-        background-position: center center;
-    }
-
-    .love-message {
-        top: 12px;
-        max-width: 90%;
-        padding: 8px 13px;
-        font-size: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* ---------- CHARACTERS (MOBILE SCALED UNIFORM) ---------- */
-
-    .character {
-        width: 135px;
-        height: 185px;
-        bottom: 15px;
-    }
-
-    .character img {
-        width: 135px;
-        height: 170px;
-    }
-
-    .speech-bubble {
-        bottom: 160px;
-        font-size: 10px;
-        padding: 7px 10px;
-        max-width: 190px;
-    }
-
-    .action-message {
-        bottom: 30%;
-        max-width: 85%;
-        text-align: center;
-        white-space: normal;
-        font-size: 12px;
-        padding: 10px 15px;
-    }
-
-    .controls {
-        height: 205px;
-        overflow: hidden;
-    }
-
-    .controls-inner {
-        height: 100%;
-        padding: 12px 12px 10px;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        grid-template-rows: auto auto;
-        column-gap: 10px;
-        row-gap: 10px;
-        align-items: center;
-    }
-
-    .places-section {
-        grid-column: 1 / 3;
-        width: 100%;
-        min-width: 0;
-    }
-
-    .section-title {
-        font-size: 12px;
-        margin-bottom: 7px;
-    }
-
-    .room-buttons {
-        width: 100%;
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 7px;
-        padding-bottom: 3px;
-    }
-
-    .room-button {
-        padding: 9px 13px;
-        font-size: 11px;
-        min-height: 40px;
-    }
-
-    .action-section {
-        grid-column: 1;
-        justify-content: flex-start;
-        min-width: 0;
-    }
-
-    .cute-action {
-        max-width: 100%;
-        padding: 11px 13px;
-        font-size: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .movement {
-        grid-column: 2;
-        justify-content: flex-end;
-        gap: 5px;
-    }
-
-    .move-button {
-        width: 43px;
-        height: 43px;
-        font-size: 21px;
-    }
-
-    .movement-label {
-        display: none;
-    }
-
-    .pooja-info {
-        top: 55px;
-        width: 90%;
-        padding: 8px;
-    }
-
-    .deities {
-        flex-wrap: wrap;
-    }
-}
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-    .home-title span {
-        font-size: 21px;
-    }
-
-    .room-name {
-        min-width: 55px;
-        font-size: 10px;
-    }
-
+@media (max-width: 480px) {
     .character {
         width: 120px;
         height: 165px;
@@ -624,12 +471,18 @@ body {
     }
 
     .cute-action {
-        font-size: 9px;
-        padding: 10px 11px;
+        padding: 7px 10px;
+        font-size: 10px;
+        min-height: 35px;
     }
 
     .move-button {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .controls {
+        height: 185px;
     }
 }
