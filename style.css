@@ -17,11 +17,11 @@
   margin: 0;
   padding: 0;
   font-family: 'DM Sans', sans-serif;
-  /* Disable text highlighting / copying across the entire page */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -35,14 +35,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Prevent image dragging and saving */
-img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  pointer-events: auto;
-}
-
-/* --- TRUE BLOOMING & PULSING BACKGROUND HEART SHAPE (Richer & Darker Pink) --- */
+/* --- TRUE BLOOMING & PULSING BACKGROUND HEART SHAPE --- */
 .blooming-bg-heart-container {
   position: fixed;
   top: 50%;
@@ -55,6 +48,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform;
 }
 
 .concentric-ring {
@@ -116,6 +110,7 @@ img {
   color: var(--soft-pink);
   opacity: 0.5;
   animation: floatUp linear infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes floatUp {
@@ -135,7 +130,8 @@ img {
 /* Cards Shared Styles */
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: var(--border-radius);
   padding: 24px;
   box-shadow: var(--card-shadow);
@@ -143,7 +139,7 @@ img {
   position: relative;
 }
 
-/* Beating Heart Animation & Touch Glow Effect */
+/* Beating Heart Animation */
 @keyframes heartBeat {
   0%, 100% { transform: scale(1); }
   15% { transform: scale(1.25); }
@@ -156,11 +152,9 @@ img {
   display: inline-block;
   animation: heartBeat 2.5s infinite ease-in-out;
   cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
   user-select: none;
 }
 
-/* Touch / Click Reddish-Pink Glow Reaction */
 .touch-glow {
   transform: scale(1.35) rotate(-8deg) !important;
   filter: drop-shadow(0 0 10px #ff1744) hue-rotate(-15deg);
@@ -290,7 +284,7 @@ img {
   line-height: 1.4;
 }
 
-/* Character Styling & Speech Bubble with Transparent Background */
+/* Character Styling & Speech Bubble */
 .hero-character-container {
   display: flex;
   flex-direction: column;
@@ -332,24 +326,27 @@ img {
   mix-blend-mode: darken;
   filter: contrast(120%) brightness(105%) drop-shadow(0 8px 16px rgba(242, 166, 185, 0.25));
   transition: transform 0.3s ease;
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 
 .character-img:hover {
   transform: scale(1.03);
 }
 
-/* Calendar Dropdown Box */
+/* --- FULLY RESPONSIVE CALENDAR DROPDOWN --- */
 .calendar-dropdown {
   position: absolute;
   top: 110%;
   right: 0;
-  width: 300px;
+  width: 290px;
+  max-width: calc(100vw - 40px);
   background: #fff;
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
   border: 1px solid var(--light-pink);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .hidden {
@@ -365,7 +362,7 @@ img {
 
 .cal-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--accent-pink);
 }
 
@@ -375,7 +372,7 @@ img {
   font-size: 1.1rem;
   color: var(--accent-pink);
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px 10px;
 }
 
 .cal-weekdays {
@@ -630,6 +627,7 @@ img {
   height: 100vh;
   background: rgba(74, 21, 37, 0.4);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -736,15 +734,19 @@ img {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustments */
+/* Mobile Responsive Adjustments */
 @media (max-width: 640px) {
+  body {
+    padding: 10px 6px;
+  }
+
   .hero-body {
     grid-template-columns: 1fr;
     text-align: center;
   }
   
   .hero-greeting {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   .content-split-grid {
@@ -761,5 +763,11 @@ img {
 
   .time-badge {
     font-size: 0.75rem;
+  }
+
+  .calendar-dropdown {
+    right: 50%;
+    transform: translateX(50%);
+    width: 90vw;
   }
 }
