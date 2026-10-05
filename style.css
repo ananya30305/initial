@@ -1,6 +1,6 @@
 :root {
   --bg-color: #fcf4f6;
-  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-bg: rgba(255, 255, 255, 0.95);
   --primary-pink: #e65c7b;
   --soft-pink: #f2a6b9;
   --light-pink: #fce8ec;
@@ -28,6 +28,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-dark);
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   padding: 20px 12px;
@@ -733,32 +734,34 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- MOBILE RESPONSIVE EDGE-TO-EDGE EXPANSION --- */
+/* --- MOBILE RESPONSIVE 100% WIDTH EXPANSION --- */
 @media (max-width: 640px) {
   body {
     padding: 0;
+    width: 100%;
   }
 
   .app-wrapper {
-    width: 100%;
-    max-width: 100%;
-    gap: 12px;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px;
   }
 
   .card {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    padding: 18px 14px;
-    box-shadow: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.9);
-    border-bottom: 1px solid var(--light-pink);
+    border-radius: 0 !important;
+    width: 100% !important;
+    padding: 16px 12px;
+    box-shadow: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1.5px solid var(--light-pink);
   }
 
   .top-nav {
     padding: 12px 14px;
+    width: 100%;
     background: var(--card-bg);
-    border-bottom: 1px solid var(--light-pink);
+    border-bottom: 1.5px solid var(--light-pink);
   }
 
   .hero-body {
@@ -776,6 +779,7 @@ body {
   }
   
   .feelings-grid {
+    grid-replace: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
   }
   
