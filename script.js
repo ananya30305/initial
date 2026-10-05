@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentCycleIndex = 0;
   let isInteractiveCycleMode = false;
   let isSpecialDayFlipMode = false;
+  let morningLoopInterval = null; // 2-second auto timer for 7am-8:30am loop
 
   // --- Temporary Override State for Feeling Buttons (15-second timer) ---
   let feelingOverrideTimeout = null;
@@ -187,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetImage = "images/main-character.png";
     let enableCycle = false;
     let specialFlip = false;
+    let isMorningLoopActive = false;
 
     const inRange = (startH, startM, endH, endM) => {
       const start = startH * 60 + startM;
@@ -211,7 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
       normalSubtext = `Edyaa janaa hogi neeru kudi kandha i love you my babie`;
       normalStatus = `Good morning sunshine! Tap my picture to flip cards. ☀️`;
       enableCycle = true;
-    } else if (inRange(7, 0, 11, 0)) {
+    } else if (inRange(7, 0, 8, 30)) {
+      // 7:00 AM - 8:30 AM: Loop cycle of night.png, morning.png, us.png with 2 sec timer & touch swap
+      normalGreeting = `Goodie morning, My Muddu 💕`;
+      normalSubtext = `Rise and shine, my love! Enjoy this sweet morning loop.`;
+      normalStatus = `Tap my picture or wait to watch the card loop! ☀️`;
+      isMorningLoopActive = true;
+    } else if (inRange(8, 31, 10, 30)) {
+      // 8:31 AM - 10:30 AM: Breakfast Time with food.png
+      normalGreeting = `Goodie morning, Breakfast Time! 🍳`;
+      normalSubtext = `Eat your breakfast well, my muddu kandha!`;
+      normalStatus = `Start your morning with delicious food and energy! 🥞`;
+      targetImage = "images/food.png";
+    } else if (inRange(10, 31, 11, 0)) {
       normalGreeting = `Goodie morning, Breakfast Time! 🍳`;
       normalSubtext = `Eat your breakfast well, my muddu kandha!`;
       normalStatus = `Start your morning with delicious food and energy! 🥞`;
@@ -277,11 +291,27 @@ document.addEventListener('DOMContentLoaded', () => {
     timeSubMessage.textContent = subtext;
     dynamicStatusText.textContent = statusText;
 
-    isInteractiveCycleMode = enableCycle;
+    isInteractiveCycleMode = enableCycle || isMorningLoopActive;
     isSpecialDayFlipMode = specialFlip;
 
+    // Handle 2-second auto timer loop for 7am-8:30am window
+    if (isMorningLoopActive) {
+      if (!morningLoopInterval) {
+        morningLoopInterval = setInterval(() => {
+          currentCycleIndex = (currentCycleIndex + 1) % characterCycleImages.length;
+          mainCharacterImg.src = characterCycleImages[currentCycleIndex];
+          updateSpeechBubbleForImage(characterCycleImages[currentCycleIndex]);
+        }, 2000);
+      }
+    } else {
+      if (morningLoopInterval) {
+        clearInterval(morningLoopInterval);
+        morningLoopInterval = null;
+      }
+    }
+
     if (!feelingOverrideTimeout) {
-      if (!enableCycle && !specialFlip) {
+      if (!isMorningLoopActive && !enableCycle && !specialFlip) {
         mainCharacterImg.src = targetImage;
         updateSpeechBubbleForImage(targetImage);
       } else if (specialFlip) {
@@ -289,11 +319,15 @@ document.addEventListener('DOMContentLoaded', () => {
           mainCharacterImg.src = targetImage;
         }
         updateSpeechBubbleForImage(mainCharacterImg.src);
-      } else {
+      } else if (!isMorningLoopActive) {
         if (!mainCharacterImg.src.includes('night.png') && !mainCharacterImg.src.includes('morning.png') && !mainCharacterImg.src.includes('us.png')) {
           mainCharacterImg.src = characterCycleImages[currentCycleIndex];
         }
         updateSpeechBubbleForImage(mainCharacterImg.src);
+      } else {
+        if (morningLoopInterval && !mainCharacterImg.src.includes('night.png') && !mainCharacterImg.src.includes('morning.png') && !mainCharacterImg.src.includes('us.png')) {
+          mainCharacterImg.src = characterCycleImages[currentCycleIndex];
+        }
       }
     }
   }
@@ -333,9 +367,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const notePool = [
-      `Janaaa Mark, my most peaceful place is the space you make for me.`,
-      `Nishu, even my grocery lists have secret little 'I miss you' notes now.`,
-      `Nishan, you are the poem I never planned to write but couldn't stop.`,
+      `Janaaa Marii, my most peaceful place is the space you make for me.`,
+      `muduuu, even my grocery lists have secret little 'I miss you' notes now.`,
+      `mushi motoo, you are the poem I never planned to write but couldn't stop.`,
       `Cutie, don't forget how loved you are today. Come back to this letter when you do.`,
       `I picked you today. Same as yesterday. Same as tomorrow.`,
       `My star-boy, one more day of loving you completely.`,
