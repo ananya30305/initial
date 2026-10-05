@@ -148,7 +148,7 @@ body {
 }
 
 /* =========================
-   CHARACTERS (INCREASED SIZE)
+   CHARACTERS (DESKTOP DEFAULT)
 ========================= */
 
 .character {
@@ -295,7 +295,7 @@ body {
 }
 
 /* =========================
-   BOTTOM CONTROLS
+   BOTTOM CONTROLS (DESKTOP DEFAULT)
 ========================= */
 
 .controls {
@@ -442,7 +442,7 @@ body {
 }
 
 /* =========================================================
-   MOBILE RESPONSIVE OVERRIDES
+   MOBILE RESPONSIVE OVERRIDES (TARGETED ONLY FOR PHONES <= 768px)
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -451,66 +451,69 @@ body {
     }
 
     .top-bar {
-        height: 52px;
-        padding: 0 10px;
+        height: 48px;
+        padding: 0 8px;
     }
 
     .back-button {
-        padding: 5px 10px;
-        font-size: 12px;
+        padding: 4px 8px;
+        font-size: 11px;
     }
 
     .home-title span {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     .home-title small {
-        font-size: 8px;
+        font-size: 7px;
     }
 
     .room-name {
-        min-width: 60px;
-        font-size: 12px;
+        min-width: 50px;
+        font-size: 11px;
     }
 
+    /* Shrink game world height so controls fit fully on screen */
     .game-world {
-        height: calc(100vh - 52px - 145px);
+        height: calc(100vh - 48px - 160px);
         min-height: 0;
     }
 
-    /* Larger, prominent character size on mobile view as well */
+    /* Properly sized, clean characters for mobile without overlapping */
     .character {
-        width: 155px;
-        height: 205px;
-        bottom: 10px;
+        width: 100px;
+        height: 140px;
+        bottom: 8px;
     }
 
     .character img {
-        width: 155px;
-        height: 195px;
+        width: 100px;
+        height: 130px;
     }
 
     .speech-bubble {
-        bottom: 195px;
-        font-size: 10px;
-        padding: 4px 8px;
+        bottom: 130px;
+        font-size: 9px;
+        padding: 3px 6px;
     }
 
     .action-message {
         bottom: 30%;
-        font-size: 11px;
-        padding: 7px 12px;
+        font-size: 10px;
+        padding: 6px 10px;
     }
 
+    /* Compact control panel height so all action buttons & arrows fit perfectly */
     .controls {
-        height: 145px;
+        height: 160px;
     }
 
     .controls-inner {
-        padding: 8px 10px;
+        padding: 6px 8px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 4px;
     }
 
     .places-section {
@@ -518,29 +521,34 @@ body {
         flex: unset;
     }
 
+    .section-title {
+        display: none; /* Hide section title on mobile to save vertical space */
+    }
+
     .room-buttons {
-        gap: 5px;
+        gap: 4px;
         padding-bottom: 2px;
     }
 
     .room-button {
-        padding: 5px 9px;
+        padding: 4px 8px;
         font-size: 10px;
-        border-radius: 16px;
+        border-radius: 14px;
     }
 
+    /* Bottom row containing action buttons + move arrows side by side */
     .bottom-action-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 6px;
+        gap: 4px;
         width: 100%;
     }
 
     .action-section {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 3px;
         overflow-x: auto;
         flex: 1;
         min-width: 0;
@@ -553,21 +561,25 @@ body {
     }
 
     .cute-action {
-        padding: 6px 10px;
-        font-size: 10px;
-        min-height: 36px;
-        border-radius: 16px;
+        padding: 5px 8px;
+        font-size: 9px;
+        min-height: 32px;
+        border-radius: 14px;
         flex-shrink: 0;
     }
 
     .movement {
-        gap: 5px;
+        gap: 3px;
         flex-shrink: 0;
     }
 
+    .movement-label {
+        display: none;
+    }
+
     .move-button {
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
     }
 }
