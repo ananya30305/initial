@@ -453,7 +453,7 @@ body {
 
     .character img {
         width: 95px;
-        height: 145px; /* Uniform exact height for both characters */
+        height: 135px; /* Uniform exact height for both characters */
         object-fit: contain;
         object-position: bottom center;
     }
