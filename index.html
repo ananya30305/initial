@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body oncontextmenu="return false">
 
   <!-- Blooming / Pulsing Interactive Background Heart Container -->
   <div class="blooming-bg-heart-container" id="bloomingBgHeart">
@@ -82,7 +82,7 @@
           <div class="speech-bubble" id="characterSpeechBubble">
             <p id="speechBubbleText">No matter what, I'm always here for you puppu.💖</p>
           </div>
-          <img id="mainCharacterImg" src="images/main-character.png" alt="Cute Character" class="character-img">
+          <img id="mainCharacterImg" src="images/main-character.png" alt="Cute Character" class="character-img" draggable="false">
         </div>
       </div>
     </section>
@@ -207,6 +207,27 @@
   </div>
 
   <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Anti-Copy and Anti-Inspection Security Script -->
+  <script>
+    // Disable right-click context menu globally
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Disable text highlighting and dragging
+    document.addEventListener('selectstart', event => event.preventDefault());
+    
+    // Disable common inspection shortcuts (F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S)
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || 
+        (e.ctrlKey && (e.key === 'u' || e.key === 's'))
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>

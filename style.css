@@ -17,6 +17,11 @@
   margin: 0;
   padding: 0;
   font-family: 'DM Sans', sans-serif;
+  /* Disable text highlighting / copying across the entire page */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -28,6 +33,13 @@ body {
   padding: 20px 12px;
   position: relative;
   overflow-x: hidden;
+}
+
+/* Prevent image dragging and saving */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
 }
 
 /* --- TRUE BLOOMING & PULSING BACKGROUND HEART SHAPE (Richer & Darker Pink) --- */
@@ -317,7 +329,6 @@ body {
   height: auto;
   object-fit: contain;
   background: transparent !important;
-  /* This magically filters out the grey/white checkerboard background pixels from the image */
   mix-blend-mode: darken;
   filter: contrast(120%) brightness(105%) drop-shadow(0 8px 16px rgba(242, 166, 185, 0.25));
   transition: transform 0.3s ease;
@@ -441,7 +452,7 @@ body {
 
 .feeling-btn {
   background: #fff;
-  border: 1px solid var(--light-pink);
+  border: 1.5px solid var(--light-pink);
   border-radius: 16px;
   padding: 12px 8px;
   display: flex;
@@ -547,7 +558,7 @@ body {
 
 .special-day-item {
   background: #fff;
-  border: 1px solid var(--light-pink);
+  border: 1.5px solid var(--light-pink);
   border-radius: 16px;
   padding: 12px;
   display: flex;
