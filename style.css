@@ -334,7 +334,7 @@ body {
   transform: scale(1.03);
 }
 
-/* --- CALENDAR DROPDOWN (Desktop Default) --- */
+/* --- CALENDAR DROPDOWN --- */
 .calendar-dropdown {
   position: absolute;
   top: 110%;
@@ -733,10 +733,32 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- MOBILE RESPONSIVE ADJUSTMENTS --- */
+/* --- MOBILE RESPONSIVE EDGE-TO-EDGE EXPANSION --- */
 @media (max-width: 640px) {
   body {
-    padding: 10px 6px;
+    padding: 0;
+  }
+
+  .app-wrapper {
+    width: 100%;
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  .card {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 18px 14px;
+    box-shadow: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--light-pink);
+  }
+
+  .top-nav {
+    padding: 12px 14px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--light-pink);
   }
 
   .hero-body {
@@ -750,6 +772,7 @@ body {
   
   .content-split-grid {
     grid-template-columns: 1fr;
+    gap: 0;
   }
   
   .feelings-grid {
@@ -764,7 +787,6 @@ body {
     font-size: 0.75rem;
   }
 
-  /* Optimized compact calendar for mobile screens */
   .calendar-dropdown {
     right: 50%;
     transform: translateX(50%);
