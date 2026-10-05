@@ -444,34 +444,24 @@ body {
 /* =========================================================
    MOBILE RESPONSIVE OVERRIDES (TARGETED STRICTLY FOR PHONES)
 ========================================================= */
-
 @media (max-width: 768px) {
-    body {
-        overflow: hidden;
+    /* --- Keep your existing mobile overrides here --- */
+
+    /* Fix Pooja info box position on mobile so it doesn't overlap characters */
+    .pooja-info {
+        top: 42px;
+        padding: 6px 10px;
+        transform: translateX(-50%) scale(0.85); /* Slightly scale down to fit small screens neatly */
     }
 
-    .top-bar {
-        height: 50px;
-        padding: 0 10px;
+    .pooja-info > div:first-child {
+        font-size: 18px;
     }
 
-    .back-button {
-        padding: 5px 10px;
-        font-size: 11px;
+    .pooja-info span {
+        font-size: 9px;
     }
-
-    .home-title span {
-        font-size: 20px;
-    }
-
-    .home-title small {
-        font-size: 8px;
-    }
-
-    .room-name {
-        min-width: 55px;
-        font-size: 11px;
-    }
+}
 
     /* Adjust game world height so controls fit completely on screen */
     .game-world {
