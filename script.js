@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const musicToggleBtn = document.getElementById('musicToggleBtn');
   const bgAudio = document.getElementById('bgAudio');
   const audioIcon = document.getElementById('audioIcon');
-  const audioLabel = document.getElementById('audioLabel');
 
   const openLetterBtn = document.getElementById('openLetterBtn');
   const closeLetterBtn = document.getElementById('closeLetterBtn');
@@ -87,20 +86,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Background Music Handling ---
-  let isPlaying = false;
+  // --- Background Music Handling (3-State Cycle: 🎵 -> ▶️ -> ⏸ -> 🎵) ---
+  let musicState = 0; // 0: 🎵 (Stopped/Default), 1: ▶️ (Playing), 2: ⏸ (Paused)
   
+  if (audioIcon) {
+    audioIcon.textContent = '🎵';
+  }
+
   musicToggleBtn.addEventListener('click', () => {
-    if (isPlaying) {
-      bgAudio.pause();
-      audioIcon.textContent = '🎵';
-      audioLabel.textContent = 'Play Music';
-    } else {
+    if (musicState === 0) {
+      // Step 1: 🎵 pressed -> Start playing, change to ▶️
       bgAudio.play().catch(() => {});
-      audioIcon.textContent = '⏸';
-      audioLabel.textContent = 'Pause Music';
+      if (audioIcon) audioIcon.textContent = '▶️';
+      musicState = 1;
+    } else if (musicState === 1) {
+      // Step 2: ▶️ pressed -> Pause audio, change to ⏸
+      bgAudio.pause();
+      if (audioIcon) audioIcon.textContent = '⏸';
+      musicState = 2;
+    } else {
+      // Step 3: ⏸ pressed -> Keep paused, reset back to 🎵
+      if (audioIcon) audioIcon.textContent = '🎵';
+      musicState = 0;
     }
-    isPlaying = !isPlaying;
   });
 
   // --- Blooming Background Heart Touch/Click Interactive Reaction ---
@@ -330,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'birthday',
         note: `Happy Birthday my mudduu Kandhaaa❤️🎂 Today is all about celebrating the most wonderful human in my world!`,
         letterPreview: `Happy Birthday my dearest muddu! I thank my stars every day that you were born...`,
-        letterFull: `My love\n\nHappy Birthday my mudduu marii! 🎂❤️️\n\nToday is the most special day of the year because it's the day you entered this world. I am so grateful to be by your side celebrating another year of your beautiful life.\n\nYou bring so much laughter, warmth, and peace into my life. I hope all your dreams come true this year, and I promise to support you and stand by you through every single step.\n\nAlways yours,\nYour Wifey 💖`,
+        letterFull: `My love\n\nHappy Birthday my mudduu marii! 🎂❤\n\nToday is the most special day of the year because it's the day you entered this world. I am so grateful to be by your side celebrating another year of your beautiful life.\n\nYou bring so much laughter, warmth, and peace into my life. I hope all your dreams come true this year, and I promise to support you and stand by you through every single step.\n\nAlways yours,\nYour Wifey 💖`,
         status: `Happy Birthday my mudduu kandhaaa! 🎂 Special Audio active!`
       };
     }
@@ -409,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateClockAndGreeting();
     }
 
-    if (isPlaying) {
+    if (musicState === 1) {
       bgAudio.play().catch(() => {});
     }
 

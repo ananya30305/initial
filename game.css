@@ -7,7 +7,6 @@
     --white: #ffffff;
 }
 
-
 /* =========================
    RESET
 ========================= */
@@ -19,24 +18,19 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
     font-family: "DM Sans", sans-serif;
     background: var(--cream);
     color: var(--brown);
-
     overflow: hidden;
-
     touch-action: manipulation;
 }
-
 
 /* =========================
    TOP BAR
@@ -44,1090 +38,598 @@ body {
 
 .top-bar {
     height: 72px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 24px;
-
     background: rgba(255, 248, 245, 0.97);
-
     border-bottom: 1px solid rgba(143, 64, 82, 0.15);
-
     position: relative;
-
     z-index: 50;
-
     backdrop-filter: blur(12px);
-
     flex-shrink: 0;
 }
 
-
 .back-button {
     text-decoration: none;
-
     color: var(--dark-pink);
-
     background: #fff;
-
     border: 1px solid #efd4da;
-
     padding: 9px 16px;
-
     border-radius: 30px;
-
     font-size: 14px;
-
     font-weight: 600;
-
     white-space: nowrap;
 }
-
 
 .home-title {
     text-align: center;
-
     min-width: 0;
 }
 
-
 .home-title span {
     display: block;
-
     font-family: "Great Vibes", cursive;
-
     font-size: 30px;
-
     color: var(--dark-pink);
-
     white-space: nowrap;
 }
-
 
 .home-title small {
     display: block;
-
     font-size: 11px;
-
     color: #a8757e;
-
     letter-spacing: 1px;
-
     margin-top: 2px;
 }
 
-
 .room-name {
     min-width: 90px;
-
     text-align: right;
-
     font-size: 14px;
-
     font-weight: 600;
-
     color: var(--dark-pink);
-
     white-space: nowrap;
 }
-
 
 /* =========================
    GAME WORLD
 ========================= */
 
 .game-world {
-
     position: relative;
-
     height: calc(100vh - 72px - 170px);
-
     min-height: 420px;
-
     overflow: hidden;
-
     background: #eadbd5;
 }
 
-
 .room-background {
-
     position: absolute;
-
     inset: 0;
-
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
-
     z-index: 0;
-
-    transition:
-        background-image 0.4s ease;
+    transition: background-image 0.4s ease;
 }
-
 
 .world-light {
-
     position: absolute;
-
     inset: 0;
-
     pointer-events: none;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.04),
-            rgba(255,231,224,0.10)
-        );
-
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.04),
+        rgba(255,231,224,0.10)
+    );
     z-index: 2;
 }
-
 
 /* =========================
    LOVE MESSAGE
 ========================= */
 
 .love-message {
-
     position: absolute;
-
     top: 20px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     background: rgba(255,255,255,0.90);
-
     padding: 9px 18px;
-
     border-radius: 30px;
-
     color: var(--dark-pink);
-
     font-size: 13px;
-
     font-weight: 600;
-
-    box-shadow:
-        0 8px 30px rgba(80,30,40,0.12);
-
+    box-shadow: 0 8px 30px rgba(80,30,40,0.12);
     z-index: 20;
-
     white-space: nowrap;
-
     pointer-events: none;
 }
 
-
 /* =========================
-   CHARACTERS
+   CHARACTERS (UNIFORM & LARGER SIZE)
 ========================= */
 
-/*
-   IMPORTANT:
-   Both characters use exactly the same
-   width + height box.
-
-   This prevents the girl from becoming
-   smaller than the boy.
-*/
-
 .character {
-
     position: absolute;
-
-    bottom: 35px;
-
-    width: 125px;
-
-    height: 170px;
-
+    bottom: 25px;
+    width: 170px;
+    height: 230px;
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: flex-end;
-
     z-index: 10;
-
-    transition:
-        left 0.25s ease-out;
+    transition: left 0.15s linear;
 }
 
-
+/* Force both character images to share exact dimensions so heights match perfectly */
 .character img {
-
-    width: 125px;
-
-    height: 150px;
-
+    width: 170px;
+    height: 210px;
     object-fit: contain;
-
     object-position: bottom center;
-
     display: block;
-
-    filter:
-        drop-shadow(
-            0 9px 8px rgba(50,20,20,0.20)
-        );
+    filter: drop-shadow(0 12px 10px rgba(50,20,20,0.25));
 }
-
-
-/*
-   Keep a REAL fixed visual distance
-   between the two characters.
-
-   JS changes these positions while moving.
-*/
 
 .boy-character {
-
-    left: 58%;
-
     z-index: 10;
 }
 
-
 .girl-character {
-
-    left: calc(58% - 115px);
-
-    z-index: 11;
+    z-index: 9;
 }
-
 
 /* =========================
    SPEECH
 ========================= */
 
 .speech-bubble {
-
     position: absolute;
-
-    bottom: 150px;
-
+    bottom: 200px;
     left: 50%;
-
     transform: translateX(-50%);
-
     background: white;
-
     color: var(--dark-pink);
-
     padding: 9px 13px;
-
     border-radius: 16px;
-
     font-size: 12px;
-
     font-weight: 600;
-
-    box-shadow:
-        0 8px 25px rgba(70,20,30,0.15);
-
+    box-shadow: 0 8px 25px rgba(70,20,30,0.15);
     border: 1px solid #f0cbd3;
-
     white-space: nowrap;
-
     z-index: 30;
-
     animation: floating 2.5s ease-in-out infinite;
 }
 
-
 .speech-bubble::after {
-
     content: "";
-
     position: absolute;
-
     bottom: -7px;
-
     left: 50%;
-
-    transform:
-        translateX(-50%)
-        rotate(45deg);
-
+    transform: translateX(-50%) rotate(45deg);
     width: 12px;
-
     height: 12px;
-
     background: white;
-
     border-right: 1px solid #f0cbd3;
-
     border-bottom: 1px solid #f0cbd3;
 }
 
-
 @keyframes floating {
-
-    0%,
-    100% {
-        margin-top: 0;
-    }
-
-    50% {
-        margin-top: -5px;
-    }
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -5px; }
 }
-
 
 /* =========================
    POOJA
 ========================= */
 
 .pooja-info {
-
     position: absolute;
-
     top: 75px;
-
     left: 50%;
-
     transform: translateX(-50%);
-
     z-index: 20;
-
     text-align: center;
-
     background: rgba(255,250,242,0.93);
-
     padding: 12px 18px;
-
     border-radius: 18px;
-
-    box-shadow:
-        0 10px 30px rgba(70,40,20,0.15);
+    box-shadow: 0 10px 30px rgba(70,40,20,0.15);
 }
 
-
 .pooja-info > div:first-child {
-
     font-size: 25px;
-
     margin-bottom: 3px;
 }
 
-
 .pooja-info span {
-
     font-size: 12px;
-
     color: #79504c;
-
     font-weight: 600;
 }
 
-
 .deities {
-
     display: flex;
-
     gap: 7px;
-
     justify-content: center;
-
     margin-top: 8px;
 }
 
-
 .deities span {
-
     background: #fff;
-
     padding: 4px 8px;
-
     border-radius: 20px;
-
     font-size: 10px;
-
     color: #9a5b32;
 }
-
 
 /* =========================
    ACTION MESSAGE
 ========================= */
 
 .action-message {
-
     position: absolute;
-
     left: 50%;
-
     bottom: 35%;
-
     transform: translateX(-50%);
-
     z-index: 30;
-
     background: rgba(255,255,255,0.94);
-
     padding: 13px 20px;
-
     border-radius: 25px;
-
     color: var(--dark-pink);
-
     font-weight: 700;
-
     font-size: 14px;
-
-    box-shadow:
-        0 10px 35px rgba(60,20,30,0.15);
-
+    box-shadow: 0 10px 35px rgba(60,20,30,0.15);
     animation: pop 0.35s ease;
-
     white-space: nowrap;
 }
 
-
 @keyframes pop {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateX(-50%)
-            scale(0.8);
-    }
-
-    100% {
-        opacity: 1;
-        transform:
-            translateX(-50%)
-            scale(1);
-    }
+    0% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
-
 
 .hidden {
     display: none !important;
 }
-
 
 /* =========================
    BOTTOM CONTROLS
 ========================= */
 
 .controls {
-
     height: 170px;
-
-    background:
-        rgba(255,248,245,0.98);
-
-    border-top:
-        1px solid rgba(143,64,82,0.12);
-
+    background: rgba(255,248,245,0.98);
+    border-top: 1px solid rgba(143,64,82,0.12);
     position: relative;
-
     z-index: 50;
-
     flex-shrink: 0;
 }
 
-
 .controls-inner {
-
     width: 100%;
-
     height: 100%;
-
     max-width: 1100px;
-
     margin: auto;
-
     padding: 18px 24px;
-
     display: flex;
-
     align-items: center;
-
     gap: 20px;
 }
-
 
 /* =========================
    ROOMS
 ========================= */
 
 .places-section {
-
     flex: 1;
-
     min-width: 0;
 }
 
-
 .section-title {
-
     font-size: 12px;
-
     font-weight: 700;
-
     color: #95616b;
-
     margin-bottom: 9px;
 }
 
-
 .room-buttons {
-
     display: flex;
-
     gap: 7px;
-
     overflow-x: auto;
-
     overflow-y: hidden;
-
     padding-bottom: 4px;
-
     scrollbar-width: none;
 }
 
-
 .room-buttons::-webkit-scrollbar {
-
     display: none;
 }
 
-
 .room-button {
-
     flex-shrink: 0;
-
     border: 1px solid #efd2d8;
-
     background: white;
-
     color: #794550;
-
     padding: 9px 12px;
-
     border-radius: 25px;
-
     font-family: inherit;
-
     font-size: 12px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     white-space: nowrap;
-
     transition: 0.2s;
 }
 
-
 .room-button.active {
-
     background: var(--dark-pink);
-
     color: white;
-
     border-color: var(--dark-pink);
 }
-
 
 /* =========================
    CUTE ACTION
 ========================= */
 
 .action-section {
-
     flex-shrink: 0;
-
     display: flex;
-
     align-items: center;
 }
 
-
 .cute-action {
-
     border: none;
-
     background: var(--soft-pink);
-
     color: var(--dark-pink);
-
     padding: 12px 16px;
-
     border-radius: 30px;
-
     font-family: inherit;
-
     font-size: 12px;
-
     font-weight: 700;
-
     cursor: pointer;
-
     white-space: nowrap;
-
     min-height: 45px;
 }
-
 
 /* =========================
    MOVEMENT
 ========================= */
 
 .movement {
-
     display: flex;
-
     align-items: center;
-
     gap: 7px;
-
     flex-shrink: 0;
 }
 
-
 .move-button {
-
     width: 48px;
-
     height: 48px;
-
     border: none;
-
     border-radius: 50%;
-
     background: var(--dark-pink);
-
     color: white;
-
     font-size: 24px;
-
     cursor: pointer;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     flex-shrink: 0;
-
-    box-shadow:
-        0 5px 15px rgba(100,30,50,0.18);
-
+    box-shadow: 0 5px 15px rgba(100,30,50,0.18);
     touch-action: manipulation;
 }
 
-
 .move-button:active {
-
     transform: scale(0.92);
 }
 
-
 .movement-label {
-
     font-size: 9px;
-
     color: #9b737a;
-
     font-weight: 700;
-
     writing-mode: vertical-rl;
-
     letter-spacing: 1px;
 }
-
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 700px) {
-
     body {
         overflow: hidden;
     }
 
-
-    /* ---------- TOP ---------- */
-
     .top-bar {
-
         height: 60px;
-
-        padding:
-            0 12px;
+        padding: 0 12px;
     }
-
 
     .back-button {
-
-        padding:
-            7px 11px;
-
+        padding: 7px 11px;
         font-size: 11px;
     }
-
 
     .back-button span {
         display: none;
     }
 
-
     .home-title span {
-
         font-size: 24px;
     }
 
-
     .home-title small {
-
         font-size: 8px;
     }
 
-
     .room-name {
-
         min-width: 65px;
-
         font-size: 11px;
     }
 
-
-    /* ---------- WORLD ---------- */
-
     .game-world {
-
         height: calc(100vh - 60px - 205px);
-
         min-height: 0;
     }
 
-
     .room-background {
-
         background-position: center center;
     }
 
-
     .love-message {
-
         top: 12px;
-
         max-width: 90%;
-
-        padding:
-            8px 13px;
-
+        padding: 8px 13px;
         font-size: 10px;
-
         overflow: hidden;
-
         text-overflow: ellipsis;
     }
 
-
-    /* ---------- CHARACTERS ---------- */
+    /* ---------- CHARACTERS (MOBILE SCALED UNIFORM) ---------- */
 
     .character {
-
-        width: 105px;
-
-        height: 145px;
-
-        bottom: 20px;
+        width: 135px;
+        height: 185px;
+        bottom: 15px;
     }
-
 
     .character img {
-
-        width: 105px;
-
-        height: 130px;
+        width: 135px;
+        height: 170px;
     }
-
-
-    /*
-       IMPORTANT:
-       The girl is NOT positioned using
-       percentage distance anymore.
-
-       This keeps the same physical gap
-       on small screens.
-    */
-
-    .boy-character {
-
-        left: 62%;
-    }
-
-
-    .girl-character {
-
-        left: calc(62% - 100px);
-    }
-
 
     .speech-bubble {
-
-        bottom: 130px;
-
+        bottom: 160px;
         font-size: 10px;
-
-        padding:
-            7px 10px;
-
+        padding: 7px 10px;
         max-width: 190px;
     }
 
-
     .action-message {
-
         bottom: 30%;
-
         max-width: 85%;
-
         text-align: center;
-
         white-space: normal;
-
         font-size: 12px;
-
-        padding:
-            10px 15px;
+        padding: 10px 15px;
     }
 
-
-    /* ---------- CONTROLS ---------- */
-
     .controls {
-
         height: 205px;
-
         overflow: hidden;
     }
 
-
     .controls-inner {
-
         height: 100%;
-
-        padding:
-            12px 12px 10px;
-
+        padding: 12px 12px 10px;
         display: grid;
-
-        grid-template-columns:
-            1fr auto;
-
-        grid-template-rows:
-            auto auto;
-
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
         column-gap: 10px;
-
         row-gap: 10px;
-
         align-items: center;
     }
 
-
-    /* ROOMS TAKE FULL WIDTH */
-
     .places-section {
-
         grid-column: 1 / 3;
-
         width: 100%;
-
         min-width: 0;
     }
 
-
     .section-title {
-
         font-size: 12px;
-
         margin-bottom: 7px;
     }
 
-
     .room-buttons {
-
         width: 100%;
-
         display: flex;
-
         flex-wrap: nowrap;
-
         overflow-x: auto;
-
         gap: 7px;
-
         padding-bottom: 3px;
     }
 
-
     .room-button {
-
-        padding:
-            9px 13px;
-
+        padding: 9px 13px;
         font-size: 11px;
-
         min-height: 40px;
     }
 
-
-    /* CUTE BUTTON */
-
     .action-section {
-
         grid-column: 1;
-
         justify-content: flex-start;
-
         min-width: 0;
     }
 
-
     .cute-action {
-
         max-width: 100%;
-
-        padding:
-            11px 13px;
-
+        padding: 11px 13px;
         font-size: 10px;
-
         overflow: hidden;
-
         text-overflow: ellipsis;
     }
 
-
-    /* MOVEMENT */
-
     .movement {
-
         grid-column: 2;
-
         justify-content: flex-end;
-
         gap: 5px;
     }
 
-
     .move-button {
-
         width: 43px;
-
         height: 43px;
-
         font-size: 21px;
     }
 
-
     .movement-label {
-
         display: none;
     }
 
-
-    /* POOJA */
-
     .pooja-info {
-
         top: 55px;
-
         width: 90%;
-
         padding: 8px;
     }
 
-
     .deities {
-
         flex-wrap: wrap;
     }
 }
-
 
 /* =========================================================
    VERY SMALL PHONES
 ========================================================= */
 
 @media (max-width: 380px) {
-
     .home-title span {
-
         font-size: 21px;
     }
 
-
     .room-name {
-
         min-width: 55px;
-
         font-size: 10px;
     }
 
-
     .character {
-
-        width: 95px;
-
-        height: 135px;
+        width: 120px;
+        height: 165px;
     }
-
 
     .character img {
-
-        width: 95px;
-
-        height: 120px;
+        width: 120px;
+        height: 150px;
     }
-
-
-    .boy-character {
-
-        left: 64%;
-    }
-
-
-    .girl-character {
-
-        left: calc(64% - 90px);
-    }
-
 
     .cute-action {
-
         font-size: 9px;
-
-        padding:
-            10px 11px;
+        padding: 10px 11px;
     }
 
-
     .move-button {
-
         width: 40px;
-
         height: 40px;
     }
 }
