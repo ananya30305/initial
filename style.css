@@ -732,7 +732,6 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 /* --- MOBILE RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 640px) {
   body {
@@ -764,21 +763,22 @@ body {
     font-size: 0.75rem;
   }
 
-  /* --- ABSOLUTE VIEWPORT CENTERED CALENDAR FIX --- */
+  /* --- FULLY VISIBLE DROPDOWN CALENDAR FIX --- */
   .calendar-trigger-wrapper {
-    position: static !important;
+    position: relative;
   }
 
   .calendar-dropdown {
-    position: fixed !important;
-    top: 50vh !important;
-    left: 50vw !important;
-    transform: translate(-50%, -50%) !important;
-    width: 300px !important;
-    max-width: 92vw !important;
-    z-index: 99999 !important;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4) !important;
-    padding: 16px !important;
+    position: absolute !important;
+    top: 110% !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    width: 280px !important;
+    max-width: calc(100vw - 32px) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2) !important;
+    padding: 14px !important;
+    z-index: 9999 !important;
   }
 
   .cal-title {
